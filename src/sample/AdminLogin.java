@@ -412,7 +412,9 @@ if (emaiiText.contains("@") || emaiiText.contains(".")){
 }
 else return false;
     }
+
 }
+
 
 
 

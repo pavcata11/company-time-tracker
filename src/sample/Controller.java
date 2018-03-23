@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -23,10 +24,12 @@ public class Controller {
    public Stage primaryStage;
    public String[] args;
     public Button loginbtn;
+    public ImageView imageView;
     private Stage stage;
 
     public void clickSignUp(ActionEvent actionEvent) throws IOException {
         lblError.setVisible(false);
+
         if (passwordField.getText().equals("admin") && usernameField.getText().equals("pavel")) {
             System.out.println("YOU login as admin");
             usernameField.setText("");
@@ -48,6 +51,7 @@ public class Controller {
     }
 
     public void checkLoginEmployee() throws IOException {
+
         int counter = 0;
         try {
             File file = new File("empoloyeelist");
