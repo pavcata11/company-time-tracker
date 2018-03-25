@@ -16,12 +16,12 @@
             <children>
                 <AnchorPane layoutX="679.0" layoutY="113.0" prefHeight="499.0" prefWidth="417.0" style="-fx-background-color: #1C1B21;">
                     <children>
-                        <TextField fx:id="usernameField" layoutX="60.0" layoutY="108.0" prefHeight="35.0" prefWidth="312.0" promptText="Username" style="-fx-background-color: #1C1B21;">
+                        <TextField fx:id="usernameField" layoutX="60.0" layoutY="90.0" prefHeight="35.0" prefWidth="312.0" promptText="Username" style="-fx-background-color: #1C1B21;">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </TextField>
-                        <Separator layoutX="60.0" layoutY="145.0" prefHeight="6.0" prefWidth="312.0" />
+                        <Separator layoutX="60.0" layoutY="122.0" prefHeight="6.0" prefWidth="312.0" />
                         <Separator layoutX="60.0" layoutY="256.0" prefHeight="6.0" prefWidth="312.0" />
                         <PasswordField fx:id="passwordField" layoutX="60.0" layoutY="221.0" prefHeight="35.0" prefWidth="312.0" promptText="Password" style="-fx-background-color: #1C1B21;">
                             <font>
@@ -34,16 +34,6 @@
                             </font>
                         </Button>
                   <Label fx:id="lblError" contentDisplay="CENTER" layoutX="60.0" layoutY="285.0" prefHeight="25.0" prefWidth="321.0" text="Password or Username Incorrect" textAlignment="RIGHT" textFill="#7400ac" visible="false" />
-                  <ImageView fx:id="imageView" fitHeight="112.0" fitWidth="98.0" layoutX="168.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image backgroundLoading="true" url="@User-512.png" />
-                         
-                     </image></ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="42.0" layoutX="339.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image backgroundLoading="true" url="@workfileicon.png" />
-                     </image>
-                  </ImageView>
 
                     </children>
                 </AnchorPane>
