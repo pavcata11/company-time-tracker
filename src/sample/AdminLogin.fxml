@@ -9,36 +9,40 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="659.0" prefWidth="1171.0" style="-fx-background-color: #292929;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminLogin">
+<AnchorPane fx:id="firstpane" depthTest="DISABLE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="659.0" prefWidth="1171.0" style="-fx-background-color: #292929;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminLogin">
     <children>
-      <AnchorPane layoutX="330.0" layoutY="527.0" prefHeight="132.0" prefWidth="846.0" style="-fx-background-color: #1C1B21;">
-         <children>
-            <Button fx:id="btnSave" blendMode="SCREEN" cache="true" cacheHint="SCALE" layoutX="613.0" layoutY="33.0" mnemonicParsing="false" onAction="#ClickSave" prefHeight="62.0" prefWidth="135.0" style="-fx-background-color: #7400ac;" text="Save" textFill="WHITE">
-               <font>
-                  <Font name="Forte" size="29.0" />
-               </font>
-            </Button>
-            <Label fx:id="readylbl" layoutX="666.0" layoutY="108.0" prefHeight="21.0" prefWidth="69.0" text="Ready" textFill="#0ed008" visible="false" />
-            <Button fx:id="logoutbtn" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#Logout" prefHeight="62.0" prefWidth="122.0" text="logOut" visible="false" />
-         </children></AnchorPane>
+        <AnchorPane layoutX="330.0" layoutY="527.0" prefHeight="132.0" prefWidth="846.0" style="-fx-background-color: #1C1B21;">
+            <children>
+                <Button fx:id="btnSave" blendMode="SCREEN" cache="true" cacheHint="SCALE" layoutX="613.0" layoutY="33.0" mnemonicParsing="false" onAction="#ClickSave" prefHeight="62.0" prefWidth="135.0" style="-fx-background-color: #7400ac;" text="Save" textFill="WHITE">
+                    <font>
+                        <Font name="Forte" size="29.0" />
+                    </font>
+                </Button>
+                <Label fx:id="readylbl" layoutX="666.0" layoutY="108.0" prefHeight="21.0" prefWidth="69.0" text="Ready" textFill="#0ed008" visible="false" />
+                <Button fx:id="logoutbtn" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#Logout" prefHeight="62.0" prefWidth="122.0" text="logOut" visible="false" />
+            </children>
+        </AnchorPane>
         <AnchorPane layoutY="-5.0" prefHeight="668.0" prefWidth="354.0" style="-fx-background-color: #1C1B21;">
             <children>
-                <MenuBar layoutY="1.0" prefWidth="330.0" style="-fx-background-color: #626262;">
+                <MenuBar layoutY="1.0" prefHeight="32.0" prefWidth="354.0" style="-fx-background-color: #626262;">
                     <menus>
                         <Menu mnemonicParsing="false" text="File">
                             <items>
-                        <MenuItem mnemonicParsing="false" onAction="#ClickSave" text="Save" />
+                                <MenuItem mnemonicParsing="false" onAction="#ClickSave" text="Save" />
                                 <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
-                        <MenuItem fx:id="menuClickLoginOut" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+                                <MenuItem fx:id="menuClickLoginOut" mnemonicParsing="false" onAction="#Logout" text="Logout" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Edit">
                             <items>
-                        <CheckMenuItem fx:id="removecustomersmenu" mnemonicParsing="false" onAction="#removeCustomers" text="Remove Customers" />
+                                <CheckMenuItem fx:id="removecustomersmenu" mnemonicParsing="false" onAction="#removeCustomers" text="Remove Customers" />
                                 <MenuItem mnemonicParsing="false" onAction="#newClear" text="Clear/New registration" />
                             </items>
                         </Menu>
@@ -46,43 +50,53 @@
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#entercustomers" text="Enter new customers" />
                                 <MenuItem mnemonicParsing="false" onAction="#registNewEmployee" text="Register new employees" />
-                                <MenuItem mnemonicParsing="false" text="See employee statistics" />
+                                <MenuItem mnemonicParsing="false" onAction="#checkViewEmployeeStatics" text="See employee statistics" />
                             </items>
                         </Menu>
                     </menus>
                 </MenuBar>
-            <ComboBox fx:id="combobox1" layoutY="194.0" prefHeight="46.0" prefWidth="253.0" promptText="Choose customer to remove" style="-fx-background-color: #626262;" visible="false" />
-            <Button fx:id="removebtn" layoutX="259.0" layoutY="195.0" mnemonicParsing="false" onAction="#remove" prefHeight="46.0" prefWidth="87.0" style="-fx-background-color: #626262;" text="Remove" visible="false" />
+                <ComboBox fx:id="combobox1" layoutY="194.0" prefHeight="46.0" prefWidth="253.0" promptText="Choose customer to remove" style="-fx-background-color: #626262;   " visible="false" />
+                <Button fx:id="removebtn" layoutX="259.0" layoutY="195.0" mnemonicParsing="false" onAction="#remove" prefHeight="46.0" prefWidth="87.0" style="-fx-background-color: #626262; -fx-text-fill: #CECECE;" text="Remove" visible="false" />
+                <ImageView fx:id="photoAdminImageView" fitHeight="312.0" fitWidth="322.0" layoutX="14.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image backgroundLoading="true" url="@bigbos1.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="photoEnterCustomers" fitHeight="342.0" fitWidth="282.0" layoutX="14.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                    <image>
+                        <Image backgroundLoading="true" url="@Boss-Baby-with-Briefcase.png" />
+                    </image>
+                </ImageView>
             </children>
         </AnchorPane>
-        <TextField fx:id="phoneTextfield" cache="true" layoutX="579.0" layoutY="417.0" prefHeight="26.0" prefWidth="330.0" promptText="Phone" style="-fx-background-color: #292929;">
+        <TextField fx:id="phoneTextfield" cache="true" layoutX="582.0" layoutY="417.0" prefHeight="26.0" prefWidth="330.0" promptText="Phone" style="-fx-background-color: #292929; -fx-text-fill: #CECECE; ">
             <font>
                 <Font size="16.0" />
             </font>
         </TextField>
-        <TextField fx:id="usernametextfield" depthTest="ENABLE" layoutX="582.0" layoutY="164.0" prefHeight="26.0" prefWidth="330.0" promptText="Username" style="-fx-background-color: #292929;">
+        <TextField fx:id="usernametextfield" depthTest="ENABLE" layoutX="582.0" layoutY="164.0" prefHeight="26.0" prefWidth="330.0" promptText="Username" style="-fx-background-color: #292929; -fx-text-fill: #CECECE; ">
             <font>
                 <Font size="16.0" />
             </font>
         </TextField>
-        <TextField fx:id="emailtextfield" cache="true" layoutX="582.0" layoutY="368.0" prefHeight="26.0" prefWidth="330.0" promptText="Email" style="-fx-background-color: #292929;">
+        <TextField fx:id="emailtextfield" cache="true" layoutX="582.0" layoutY="368.0" prefHeight="26.0" prefWidth="330.0" promptText="Email" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;">
             <font>
                 <Font size="16.0" />
             </font>
         </TextField>
-        <PasswordField fx:id="passwordtextfield" cache="true" layoutX="579.0" layoutY="261.0" prefHeight="26.0" prefWidth="330.0" promptText="Password" style="-fx-background-color: #292929;">
+        <PasswordField fx:id="passwordtextfield" cache="true" layoutX="582.0" layoutY="261.0" prefHeight="26.0" prefWidth="330.0" promptText="Password" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;">
             <font>
                 <Font size="16.0" />
             </font>
         </PasswordField>
-        <PasswordField fx:id="secondpasswordfield" cache="true" layoutX="582.0" layoutY="317.0" prefHeight="26.0" prefWidth="330.0" promptText="Second passord" style="-fx-background-color: #292929;">
+        <PasswordField fx:id="secondpasswordfield" cache="true" layoutX="588.0" layoutY="311.0" prefHeight="26.0" prefWidth="330.0" promptText="Second passord" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;">
             <font>
                 <Font size="16.0" />
             </font>
         </PasswordField>
-        <Separator fx:id="separator1" layoutX="593.0" layoutY="199.0" prefHeight="0.0" prefWidth="330.0" />
-        <Separator fx:id="separator4" layoutX="582.0" layoutY="403.0" prefHeight="0.0" prefWidth="330.0" />
-        <Separator fx:id="separator3" layoutX="582.0" layoutY="351.0" prefHeight="0.0" prefWidth="330.0" />
+        <Separator fx:id="separator1" layoutX="586.0" layoutY="199.0" prefHeight="0.0" prefWidth="330.0" />
+        <Separator fx:id="separator4" layoutX="586.0" layoutY="403.0" prefHeight="0.0" prefWidth="330.0" />
+        <Separator fx:id="separator3" layoutX="588.0" layoutY="348.0" prefHeight="0.0" prefWidth="330.0" />
         <Separator fx:id="separator2" layoutX="586.0" layoutY="296.0" prefHeight="0.0" prefWidth="330.0" />
         <Button fx:id="btbCheck" blendMode="SCREEN" cache="true" cacheHint="SCALE" layoutX="438.0" layoutY="213.0" mnemonicParsing="false" onAction="#checkUsername" prefHeight="37.0" prefWidth="113.0" style="-fx-background-color: #151515;" text="Check" textFill="WHITE">
             <font>
@@ -90,13 +104,13 @@
             </font>
         </Button>
         <Separator fx:id="separator5" layoutX="586.0" layoutY="453.0" prefHeight="0.0" prefWidth="330.0" />
-        <Label fx:id="lblemployee" layoutX="576.0" layoutY="72.0" prefHeight="62.0" prefWidth="512.0" text="Register new employees" textFill="#7400ac">
+        <Label fx:id="lblemployee" layoutX="523.0" layoutY="14.0" prefHeight="62.0" prefWidth="512.0" text="Register new employees" textFill="#7400ac">
             <font>
                 <Font name="Forte" size="47.0" />
             </font>
         </Label>
         <Label fx:id="lblusernamebusy" layoutX="683.0" layoutY="219.0" prefHeight="20.0" prefWidth="149.0" text="Username is busy" textFill="#1b7c14" visible="false">
-            <font>
+            <font>a
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
@@ -110,14 +124,19 @@
                 <Font name="Forte" size="44.0" />
             </font>
         </Label>
-      <Label fx:id="lblpassworderorr" layoutX="632.0" layoutY="134.0" prefHeight="21.0" prefWidth="230.0" text="The passwords do not match" textFill="#1b7c14" visible="false" />
-      <TextField fx:id="firstnametext" layoutX="582.0" layoutY="167.0" prefHeight="31.0" prefWidth="330.0" promptText="First name" style="-fx-background-color: #292929;" visible="false" />
-      <TextField fx:id="lastnametext" layoutX="579.0" layoutY="216.0" prefHeight="31.0" prefWidth="330.0" promptText="Last name" style="-fx-background-color: #292929;" visible="false" />
-      <TextField fx:id="phoncecustumerstext" layoutX="588.0" layoutY="264.0" prefHeight="31.0" prefWidth="330.0" promptText="Phone" style="-fx-background-color: #292929;" visible="false" />
-      <TextField fx:id="emailcustomerstext" layoutX="589.0" layoutY="314.0" prefHeight="31.0" prefWidth="330.0" promptText="Email" style="-fx-background-color: #292929;" visible="false" />
-      <Separator fx:id="separatorcustomersEmail" layoutX="589.0" layoutY="344.0" prefHeight="3.0" prefWidth="337.0" visible="false" />
-      <Separator fx:id="separatorCustomerslastname" layoutX="590.0" layoutY="248.0" prefHeight="4.0" prefWidth="322.0" visible="false" />
-      <Separator fx:id="separatorCustomerspnone" layoutX="589.0" layoutY="292.0" prefHeight="11.0" prefWidth="337.0" visible="false" />
-      <Separator fx:id="separatorcustommerfirstname" layoutX="591.0" layoutY="197.0" prefHeight="3.0" prefWidth="325.0" visible="false" />
+        <Label fx:id="lblpassworderorr" layoutX="588.0" layoutY="134.0" prefHeight="21.0" prefWidth="230.0" text="The passwords do not match" textFill="#1b7c14" visible="false" />
+        <TextField fx:id="firstnametext" layoutX="588.0" layoutY="167.0" prefHeight="31.0" prefWidth="330.0" promptText="First name" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;" visible="false" />
+        <TextField fx:id="lastnametext" layoutX="588.0" layoutY="216.0" prefHeight="31.0" prefWidth="330.0" promptText="Last name" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;" visible="false" />
+        <TextField fx:id="phoncecustumerstext" layoutX="588.0" layoutY="264.0" prefHeight="31.0" prefWidth="330.0" promptText="Phone" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;" visible="false" />
+        <TextField fx:id="emailcustomerstext" layoutX="588.0" layoutY="314.0" prefHeight="31.0" prefWidth="330.0" promptText="Email" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;" visible="false" />
+        <Separator fx:id="separatorcustomersEmail" layoutX="589.0" layoutY="344.0" prefHeight="3.0" prefWidth="337.0" visible="false" />
+        <Separator fx:id="separatorCustomerslastname" layoutX="590.0" layoutY="248.0" prefHeight="4.0" prefWidth="322.0" visible="false" />
+        <Separator fx:id="separatorCustomerspnone" layoutX="589.0" layoutY="292.0" prefHeight="11.0" prefWidth="337.0" visible="false" />
+        <Separator fx:id="separatorcustommerfirstname" layoutX="591.0" layoutY="197.0" prefHeight="3.0" prefWidth="325.0" visible="false" />
+        <TextArea fx:id="TextAreaViewStatiscks" layoutX="618.0" layoutY="92.0" prefHeight="447.0" prefWidth="400.0" visible="false" />
+        <TextField fx:id="nameTexetfiled" layoutX="579.0" layoutY="119.0" prefHeight="31.0" prefWidth="337.0" promptText="Name" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;" />
+        <Separator fx:id="separtorname" layoutX="585.0" layoutY="154.0" prefHeight="3.0" prefWidth="337.0" />
+      <ComboBox fx:id="ComboBoxViewStatiscks" layoutX="354.0" layoutY="108.0" prefHeight="31.0" prefWidth="200.0" promptText="Choise employee" visible="false" />
+      <Button onAction="#ViewStatiskClicked" fx:id="viewbtn" layoutX="462.0" layoutY="167.0" mnemonicParsing="false" text="View" visible="false" />
     </children>
 </AnchorPane>
