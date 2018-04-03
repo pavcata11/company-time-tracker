@@ -609,7 +609,7 @@ public class AdminLogin {
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
             if (file.isFile()) {
-                 fileReader = new Scanner(file, "UTF-8");
+                fileReader = new Scanner(file, "UTF-8");
                 while (fileReader.hasNextLine()) {
 
                     if (fileReader.nextLine().equals((String) ComboBoxViewStatiscks.getValue())) {
@@ -617,7 +617,7 @@ public class AdminLogin {
                         String filename= file.getName();
 
                         try {
-                           file = new File("EmployeeInformation\\"+filename);
+                            file = new File("EmployeeInformation\\"+filename);
                             boolean isCreated = file.createNewFile();
                             if (isCreated) {
                                 System.out.println("File has been created successfully");
@@ -645,7 +645,6 @@ public class AdminLogin {
         }
     }
 }
-
 
 
 

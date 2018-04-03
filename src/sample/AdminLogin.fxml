@@ -110,7 +110,7 @@
             </font>
         </Label>
         <Label fx:id="lblusernamebusy" layoutX="683.0" layoutY="219.0" prefHeight="20.0" prefWidth="149.0" text="Username is busy" textFill="#1b7c14" visible="false">
-            <font>a
+            <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
@@ -136,7 +136,7 @@
         <TextArea fx:id="TextAreaViewStatiscks" layoutX="618.0" layoutY="92.0" prefHeight="447.0" prefWidth="400.0" visible="false" />
         <TextField fx:id="nameTexetfiled" layoutX="579.0" layoutY="119.0" prefHeight="31.0" prefWidth="337.0" promptText="Name" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;" />
         <Separator fx:id="separtorname" layoutX="585.0" layoutY="154.0" prefHeight="3.0" prefWidth="337.0" />
-      <ComboBox fx:id="ComboBoxViewStatiscks" layoutX="354.0" layoutY="108.0" prefHeight="31.0" prefWidth="200.0" promptText="Choise employee" visible="false" />
-      <Button onAction="#ViewStatiskClicked" fx:id="viewbtn" layoutX="462.0" layoutY="167.0" mnemonicParsing="false" text="View" visible="false" />
+        <ComboBox fx:id="ComboBoxViewStatiscks" layoutX="354.0" layoutY="108.0" prefHeight="31.0" prefWidth="200.0" promptText="Choise employee" visible="false" />
+        <Button onAction="#ViewStatiskClicked" fx:id="viewbtn" layoutX="462.0" layoutY="167.0" mnemonicParsing="false" text="View" visible="false" />
     </children>
 </AnchorPane>

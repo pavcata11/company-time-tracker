@@ -39,7 +39,7 @@ public class Controller {
         }
         else {
             try {
-               checkLoginEmployee();
+                checkLoginEmployee();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -110,18 +110,16 @@ public class Controller {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
- private  void   LoginAsEmployee()throws IOException{
-     stage = (Stage) loginbtn.getScene().getWindow();
-     AnchorPane root;
-     stage.setTitle("EMPLOYEE SIGN UP");
-     root = (AnchorPane) FXMLLoader.load(getClass().getResource("LoginAsEmployee.fxml"));
-     Scene scene = new Scene(root);
-     stage.setScene(scene);
-     System.out.println("LoginAsEmployee.fxml opened");
- }
+    private  void   LoginAsEmployee()throws IOException{
+        stage = (Stage) loginbtn.getScene().getWindow();
+        AnchorPane root;
+        stage.setTitle("EMPLOYEE SIGN UP");
+        root = (AnchorPane) FXMLLoader.load(getClass().getResource("LoginAsEmployee.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        System.out.println("LoginAsEmployee.fxml opened");
+    }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-
