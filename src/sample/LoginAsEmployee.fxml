@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="480.0" prefWidth="780.0" style="-fx-background-color: #292929;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLoginAsEmployee">
     <children>
-        <TextField fx:id="txtClientName" layoutX="186.0" layoutY="144.0" onAction="#messageEraser" onMouseDragOver="#messageEraser" prefHeight="39.0" prefWidth="262.0" promptText="first name, last name" style="-fx-text-inner-color: grey;" />
+        <TextField fx:id="txtClientName" layoutX="186.0" layoutY="144.0" prefHeight="39.0" prefWidth="262.0" promptText="first name, last name" style="-fx-text-inner-color: grey;" />
         <TextField fx:id="txtTimeSpent" layoutX="186.0" layoutY="227.0" prefHeight="39.0" prefWidth="262.0" promptText="minutes" style="-fx-text-inner-color: grey;" />
         <DatePicker fx:id="dtpDate" layoutX="186.0" layoutY="314.0" prefHeight="39.0" prefWidth="262.0" />
         <Label layoutX="50.0" layoutY="150.0" text="Client name" textFill="WHITE" />
@@ -22,8 +22,8 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Label>
-      <Button fx:id="btnWriteData" layoutX="186.0" layoutY="377.0" mnemonicParsing="false" onAction="#WriteData" text="Enter data" />
-      <Label fx:id="lblMessages" layoutX="349.0" layoutY="383.0" textFill="WHITE" />
+        <Button fx:id="btnWriteData" layoutX="186.0" layoutY="377.0" mnemonicParsing="false" onAction="#WriteData" text="Enter data" />
+        <Label fx:id="lblMessages" layoutX="349.0" layoutY="383.0" textFill="WHITE" />
     </children>
     <opaqueInsets>
         <Insets />
