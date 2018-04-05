@@ -1,24 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="780.0" style="-fx-background-color: #292929;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLoginAsEmployee">
+<AnchorPane prefHeight="692.0" prefWidth="1191.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLoginAsEmployee">
    <children>
-      <TextField layoutX="186.0" layoutY="144.0" prefHeight="39.0" prefWidth="262.0" style="-fx-text-inner-color: grey;" text="first name, last name" />
-      <TextField layoutX="186.0" layoutY="227.0" prefHeight="39.0" prefWidth="262.0" style="-fx-text-inner-color: grey;" text="minutes" />
-      <DatePicker layoutX="186.0" layoutY="314.0" prefHeight="39.0" prefWidth="262.0" />
-      <Label layoutX="50.0" layoutY="150.0" text="Client name" textFill="WHITE" />
-      <Label layoutX="54.0" layoutY="227.0" text="Time spent" textFill="WHITE" />
-      <Label layoutX="54.0" layoutY="314.0" text="Date" textFill="WHITE" />
       <Label layoutX="256.0" layoutY="49.0" />
-      <Label layoutX="278.0" layoutY="36.0" text="Service protocol" textFill="WHITE">
+      <ImageView fitHeight="360.0" fitWidth="1159.0" layoutX="34.0" layoutY="29.0" pickOnBounds="true">
+         <image>
+            <Image url="@workerBack--Redblack.jpg" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="-0.43" hue="-0.43" saturation="1.0" />
+         </effect>
+      </ImageView>
+      <Label fx:id="titleServiceProtocol" layoutX="507.0" layoutY="60.0" text="Service protocol" textAlignment="CENTER" textFill="#b000fce5" visible="false">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="Forte" size="40.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="listNameCustomersComboBox" layoutX="388.0" layoutY="146.0" prefHeight="39.0" prefWidth="452.0" promptText="Choose Customers" style="-fx-background-color: #000000; -fx-border-color: #b000fc; -fx-text-fill: #b000fc; -fx-prompt-text-fill: #b000fc;" visible="false">
+         <effect>
+            <Lighting bumpInput="$null" diffuseConstant="2.0" specularConstant="2.0" specularExponent="40.0" surfaceScale="0.0">
+
+            </Lighting>
+         </effect></ComboBox>
+      <ComboBox fx:id="setTimeInComboBox" layoutX="478.0" layoutY="221.0" prefHeight="39.0" prefWidth="272.0" promptText="Choose how hours work" style="-fx-background-color: #000000; -fx-border-color: #b000fc;" visible="false">
+         <effect>
+            <Lighting diffuseConstant="2.0" specularConstant="0.37" specularExponent="18.54" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+
+            </Lighting>
+         </effect></ComboBox>
+      <TextArea fx:id="textArea" layoutX="371.0" layoutY="305.0" prefHeight="174.0" prefWidth="487.0" style="-fx-background-color: #000000; -fx-border-color: #b000fc; -fx-text-fill: #b000fc; -fx-text-color: #b000fc;" visible="false" />
+      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1197.0" style="-fx-background-color: #000000;">
+        <menus>
+          <Menu mnemonicParsing="false" style="-fx-text-color: #b000fc;" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#saveInformationOfWorkInFile" text="Save" />
+              <MenuItem mnemonicParsing="false" onAction="#closeProgram" text="Close" />
+                  <MenuItem mnemonicParsing="false" onAction="#loginOut" text="LogOut" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" style="-fx-text-color: #b000fc;" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#addTextInComboBoxChooseName" text="Create" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button fx:id="donebtn" layoutX="858.0" layoutY="221.0" mnemonicParsing="false" onAction="#saveInformationInFileAndVisiableInformationInTextArea" prefHeight="44.0" prefWidth="94.0" style="-fx-background-color: #000000; -fx-border-color: #b000fc;" text="done" textFill="#b000fc" visible="false">
+         <effect>
+            <Lighting diffuseConstant="2.0" specularConstant="0.37" specularExponent="18.54" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+
+            </Lighting>
+         </effect>
+         <font>
+            <Font name="Forte" size="23.0" />
+         </font></Button>
+      <Button fx:id="savebtn" layoutX="52.0" layoutY="588.0" mnemonicParsing="false" onAction="#saveInformationOfWorkInFile" prefHeight="44.0" prefWidth="116.0" style="-fx-background-color: #000000; -fx-border-color: #b000fc;" text="SAVE" textFill="#b000fc" visible="false">
+         <effect>
+            <Lighting diffuseConstant="2.0" specularConstant="0.37" specularExponent="18.54" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+
+            </Lighting>
+         </effect>
+         <font>
+            <Font name="Forte" size="23.0" />
+         </font></Button>
+      <Label fx:id="welcomelbl" layoutX="474.0" layoutY="70.0" prefHeight="83.0" prefWidth="336.0" text="Welcome" textFill="#b000fc">
+         <font>
+            <Font name="Forte" size="73.0" />
          </font>
       </Label>
    </children>

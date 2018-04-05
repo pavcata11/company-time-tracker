@@ -8,10 +8,14 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -57,6 +61,8 @@ public class AdminLogin {
     public Separator separtorname;
     public ComboBox ComboBoxViewStatiscks;
     public Button viewbtn;
+    public Button Viewhowtimeworkingbtn;
+    public TextField Viewhowtimeworkingtextfield;
     private Stage stage;
     private int flag11 = 0;
     private int flag13 = 0;
@@ -78,8 +84,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @FXML
-    private void openLogin() throws IOException {
-
+    public void openLogin() throws IOException {
 
         stage = (Stage) logoutbtn.getScene().getWindow();
         AnchorPane root;
@@ -97,7 +102,8 @@ public class AdminLogin {
 
     public void entercustomers(ActionEvent actionEvent) throws IOException {
         photoAdminImageView.setVisible(false);
-
+        Viewhowtimeworkingtextfield.setVisible(false);
+        Viewhowtimeworkingbtn.setVisible(false);
         TextAreaViewStatiscks.setVisible(false);
         ComboBoxViewStatiscks.setVisible(false);
         nameTexetfiled.setVisible(false);
@@ -264,7 +270,7 @@ public class AdminLogin {
             if (flag == 1 || isCreated == false) {
                 writer = new FileWriter(file, true);
                 PrintWriter printer = new PrintWriter(writer);
-                printer.append("Name: " + nameTexetfiled.getText());
+                printer.append(nameTexetfiled.getText());
                 printer.println();
                 printer.close();
                 readylbl.setVisible(true);
@@ -294,7 +300,7 @@ public class AdminLogin {
             if (flag == 1 || isCreated == false) {
                 writer = new FileWriter(file, true);
                 PrintWriter printer = new PrintWriter(writer);
-                printer.append("Name: " + nameTexetfiled.getText());
+                printer.append(nameTexetfiled.getText());
                 printer.println();
                 printer.append("Username: " + usernametextfield.getText() + "           password: " + passwordtextfield.getText());
                 printer.println();
@@ -377,7 +383,8 @@ public class AdminLogin {
     public void registNewEmployee(ActionEvent actionEvent) throws IOException {
         photoAdminImageView.setVisible(true);
         photoEnterCustomers.setVisible(false);
-
+        Viewhowtimeworkingtextfield.setVisible(false);
+        Viewhowtimeworkingbtn.setVisible(false);
         newClear(actionEvent);
         lbltitlecustomers.setVisible(false);
         firstnametext.setVisible(false);
@@ -542,6 +549,8 @@ public class AdminLogin {
 
     public void checkViewEmployeeStatics(ActionEvent actionEvent) throws IOException {
         newClear(actionEvent);
+        Viewhowtimeworkingtextfield.setVisible(false);
+        Viewhowtimeworkingbtn.setVisible(true);
         nameTexetfiled.setVisible(false);
         separtorname.setVisible(false);
         photoAdminImageView.setVisible(false);
@@ -590,7 +599,7 @@ public class AdminLogin {
                         ComboBoxViewStatiscks.getItems().addAll(fileReader.nextLine());
 
                     }
-                    flag13=1;
+                    flag13 = 1;
                 }
                 fileReader.close();
             }
@@ -602,47 +611,101 @@ public class AdminLogin {
 
     }
 
-    public void ViewStatiskClicked(ActionEvent actionEvent) throws FileNotFoundException {
+    public String ViewStatiskClicked(ActionEvent actionEvent) throws IOException {
         TextAreaViewStatiscks.clear();
         Scanner fileReader = null;
+        String howSratsWorkindHowWorkingHowFinishedWorking = null;
+        String filename = null;
         File folder = new File("EmployeeInformation\\");
         File[] listOfFiles = folder.listFiles();
+        double sum = 0;
         for (File file : listOfFiles) {
             if (file.isFile()) {
-                 fileReader = new Scanner(file, "UTF-8");
+                fileReader = new Scanner(file, "UTF-8");
                 while (fileReader.hasNextLine()) {
-
                     if (fileReader.nextLine().equals((String) ComboBoxViewStatiscks.getValue())) {
                         System.out.println(file.getName());
-                        String filename= file.getName();
-
+                        filename = file.getName();
+                        String line;
+                        String firstWordHowStartsWorking = "";
+                        int i = 0, flagger = 0;
+                        if (flagger == 0) {
+                            try (Stream<String> lines = Files.lines(Paths.get("EmployeeInformation\\" + filename))) {
+                                flagger = 1;
+                                line = lines.skip(4).findFirst().get();
+                                while (line.charAt(i) != ' ') {
+                                    //   System.out.print(line.charAt(i));
+                                    firstWordHowStartsWorking = firstWordHowStartsWorking + line.charAt(i);
+                                    i++;
+                                }
+                                LocalDate localDate = LocalDate.now();
+                                System.out.println(firstWordHowStartsWorking);
+                                howSratsWorkindHowWorkingHowFinishedWorking = "From: " + firstWordHowStartsWorking + " To "
+                                        + DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
+                            }
+                            i = 0;
+                            line = "";
+                        }
                         try {
-                           file = new File("EmployeeInformation\\"+filename);
+                            file = new File("EmployeeInformation\\" + filename);
                             boolean isCreated = file.createNewFile();
                             if (isCreated) {
                                 System.out.println("File has been created successfully");
                             } else {
-                                System.out.println("File already present at the specified location");
+                                System.out.println("\n" + "File already present at the specified location");
                                 Scanner fileReader1 = new Scanner(file);
                                 while (fileReader1.hasNextLine()) {
-                                    TextAreaViewStatiscks.appendText(fileReader1.nextLine()+" \n");
+                                    TextAreaViewStatiscks.appendText(fileReader1.nextLine() + " \n");
                                 }
                                 fileReader1.close();
                             }
-
                         } catch (IOException e) {
                             System.out.println("Exception Occurred:");
                             e.printStackTrace();
                         }
+                        sum = 0;
+                        int lines = 0;
+                        int count = 0;
+                        file = new File("EmployeeInformation\\" + filename);
+                        Scanner scanner = new Scanner(file);
+                        while (scanner.hasNextLine()) {
+                            count++;
+                            scanner.nextLine();
+                            if (count >= 4) {
 
+                                List<Integer> integers = new ArrayList<>();
+                                while (scanner.hasNext()) {
+                                    if (scanner.hasNextInt()) {
+                                        integers.add(scanner.nextInt());
+
+                                    } else {
+                                        scanner.next();
+                                    }
+                                }
+                                for (i = 0; i < integers.size(); i++) {
+                                    sum += integers.get(i);
+                                }
+                            }
+                        }
                     }
                 }
-
-
-
             }
-            fileReader.close();
+
         }
+
+        howSratsWorkindHowWorkingHowFinishedWorking = howSratsWorkindHowWorkingHowFinishedWorking +
+                " The employee has worked for " + sum + " hours";
+        System.out.println(howSratsWorkindHowWorkingHowFinishedWorking);
+        System.out.println(sum);
+        fileReader.close();
+        return howSratsWorkindHowWorkingHowFinishedWorking;
+
+
+    }
+
+    public void Viewhowtimeworking(ActionEvent actionEvent) throws IOException {
+        Viewhowtimeworkingtextfield.setVisible(true);
+          Viewhowtimeworkingtextfield.setText(ViewStatiskClicked(actionEvent));
     }
 }
 

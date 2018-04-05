@@ -27,6 +27,12 @@
                 </Button>
                 <Label fx:id="readylbl" layoutX="666.0" layoutY="108.0" prefHeight="21.0" prefWidth="69.0" text="Ready" textFill="#0ed008" visible="false" />
                 <Button fx:id="logoutbtn" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#Logout" prefHeight="62.0" prefWidth="122.0" text="logOut" visible="false" />
+            <TextField fx:id="Viewhowtimeworkingtextfield" disable="true" layoutX="37.0" layoutY="49.0" prefHeight="31.0" prefWidth="528.0" visible="false" />
+            <Button fx:id="Viewhowtimeworkingbtn" layoutX="29.0" layoutY="-32.0" mnemonicParsing="false" onAction="#Viewhowtimeworking" prefHeight="62.0" prefWidth="212.0" style="-fx-background-color: #454545;" text="View how time working" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
         <AnchorPane layoutY="-5.0" prefHeight="668.0" prefWidth="354.0" style="-fx-background-color: #1C1B21;">
@@ -57,7 +63,7 @@
                 </MenuBar>
                 <ComboBox fx:id="combobox1" layoutY="194.0" prefHeight="46.0" prefWidth="253.0" promptText="Choose customer to remove" style="-fx-background-color: #626262;   " visible="false" />
                 <Button fx:id="removebtn" layoutX="259.0" layoutY="195.0" mnemonicParsing="false" onAction="#remove" prefHeight="46.0" prefWidth="87.0" style="-fx-background-color: #626262; -fx-text-fill: #CECECE;" text="Remove" visible="false" />
-                <ImageView fx:id="photoAdminImageView" fitHeight="312.0" fitWidth="322.0" layoutX="14.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="photoAdminImageView" fitHeight="312.0" fitWidth="322.0" layoutX="16.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image backgroundLoading="true" url="@bigbos1.png" />
                     </image>
@@ -137,6 +143,6 @@
         <TextField fx:id="nameTexetfiled" layoutX="579.0" layoutY="119.0" prefHeight="31.0" prefWidth="337.0" promptText="Name" style="-fx-background-color: #292929; -fx-text-fill: #CECECE;" />
         <Separator fx:id="separtorname" layoutX="585.0" layoutY="154.0" prefHeight="3.0" prefWidth="337.0" />
       <ComboBox fx:id="ComboBoxViewStatiscks" layoutX="354.0" layoutY="108.0" prefHeight="31.0" prefWidth="200.0" promptText="Choise employee" visible="false" />
-      <Button onAction="#ViewStatiskClicked" fx:id="viewbtn" layoutX="462.0" layoutY="167.0" mnemonicParsing="false" text="View" visible="false" />
+      <Button fx:id="viewbtn" layoutX="462.0" layoutY="167.0" mnemonicParsing="false" onAction="#ViewStatiskClicked" text="View" visible="false" />
     </children>
 </AnchorPane>
