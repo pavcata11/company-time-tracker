@@ -1,67 +1,57 @@
 package sample;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
-public class ControllerLoginAsEmployee extends  AdminLogin {
+public class ControllerLoginAsEmployee implements Initializable {
 
 
-    public ComboBox listNameCustomersComboBox;
-    public ComboBox setTimeInComboBox;
-    public int flag = 0;
-    public int flag1 = 0;
-    public int timeWorking = 0;
-    public Button savebtn;
-    public TextArea textArea;
-    public Button donebtn;
+
     public String userWhoNameInSystem = getNameWhoLogin() + ".txt";
-    public int flagStop = 0;
-    public Label titleServiceProtocol;
-    public Label welcomelbl;
+    public MenuBar myMenuBar;
+    public MenuItem miCloseProgram;
+    public MenuItem miLogOut;
+    public ComboBox cmbCustomerNames;
+    public TextField txtTimeSpent;
+    public Button btnWriteData;
+    public DatePicker dtpDate;
 
 
-    public String getNameWhoLogin() {
-        String nameLoginClient = null;
+    public String getNameWhoLogin()  { String line = "";
+        File file = new File("nameLoginEmployee");
         try {
-            BufferedReader br = new BufferedReader(new FileReader("nameLoginEmployee"));
-            String strLine;
-
-            while ((strLine = br.readLine()) != null) {
-                nameLoginClient = strLine;
+            Scanner scan = new Scanner(file);
+            while (scan.hasNextLine()) {
+               line = scan.nextLine();
             }
-            br.close();
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        return nameLoginClient;
+        return line;
     }
-public void visiableTrueAllElements(){
-        titleServiceProtocol.setVisible(true);
-        setTimeInComboBox.setVisible(true);
-        savebtn.setVisible(true);
-    listNameCustomersComboBox.setVisible(true);
-    donebtn.setVisible(true);
-    textArea.setVisible(true);
-    textArea.setDisable(true);
-    welcomelbl.setVisible(false);
 
-}
 
-    public void addTextInComboBoxChooseName(ActionEvent actionEvent) {
-        visiableTrueAllElements();
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println(userWhoNameInSystem);
         try {
             BufferedReader br = new BufferedReader(new FileReader("Customers"));
             String strLine;
+            int flag = 0;
             if (flag == 0) {
                 while ((strLine = br.readLine()) != null) {
-                    listNameCustomersComboBox.getItems().addAll(strLine);
+                    cmbCustomerNames.getItems().addAll(strLine);
                 }
                 flag = 1;
             }
@@ -69,33 +59,14 @@ public void visiableTrueAllElements(){
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
-        addTextInComboBoxMinutes();
     }
 
 
-    public void addTextInComboBoxMinutes() {
-        for (int i = 0; i <= 12; i++) {
-            setTimeInComboBox.getItems().addAll(i);
 
-        }
-    }
 
-    public int calculateTimeWorking() {
-        timeWorking = timeWorking + (int) setTimeInComboBox.getValue();
-        return timeWorking;
-    }
 
-    public void saveInformationInFileAndVisiableInformationInTextArea(ActionEvent actionEvent) throws IOException {
-        LocalDate localDate = LocalDate.now();
-        textArea.appendText(DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate));
-        textArea.appendText(" Work for " + listNameCustomersComboBox.getValue().toString());
-        textArea.appendText("  " + setTimeInComboBox.getValue().toString() + " hours");
-        textArea.appendText("\n");
-        calculateTimeWorking();
 
-    }
-
-    public void saveInformationOfWorkInFile(ActionEvent actionEvent) {
+    public void WriteData(ActionEvent actionEvent) {
         File file = new File("EmployeeInformation\\" + userWhoNameInSystem);
         FileWriter writer;
 
@@ -106,17 +77,14 @@ public void visiableTrueAllElements(){
                 System.out.println("File has been created successfully");
 
             } else {
-                if (flagStop == 0) {
-                    flagStop = 1;
+
                     writer = new FileWriter(file, true);
                     PrintWriter printer = new PrintWriter(writer);
-                    printer.append(textArea.getText());
-                    System.out.println(calculateTimeWorking());
+                    int ConvertMinutesStringToMinutesInt = Integer.parseInt(txtTimeSpent.getText());
+                    printer.append(dtpDate.getValue().toString()+" " + "Work for "+cmbCustomerNames.getValue().toString()+" "+ ( ConvertMinutesStringToMinutesInt + " minutes" + "\n"));
                     printer.close();
-                } else {
-                    System.out.println("vie veche napravihte protocol zaa  denq");
+dtpDate.setAccessibleText("");
 
-                }
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -130,11 +98,72 @@ public void visiableTrueAllElements(){
         System.exit(0);
     }
 
-    public void loginOut(ActionEvent actionEvent) throws IOException {
 
-    AdminLogin openLogin = new AdminLogin();
-      openLogin.openLogin();
+////
+    ///
+    ////
 
+    ////
+
+/////// tva go trii ne ni trqbva zasega mai ostavi go da sedi ne prechi /////
+    ///
+    ///
+    ////
+
+//    public void WriteData(ActionEvent event) throws IOException {
+//        if (cmbCustomerNames.getValue() == null || txtTimeSpent.getText().isEmpty() || dtpDate.getValue() == null) {
+//            Parent root = FXMLLoader.load(getClass().getResource("incorrectDataPopup.fxml"));
+//            Stage primaryStage = new Stage();
+//            primaryStage.setTitle("Incorrect data");
+//            primaryStage.setScene(new Scene(root, 200, 100));
+//            primaryStage.show();
+//        } else {
+//            File employeeData = new File("employeeData.txt");
+//            try {
+//                if (!employeeData.exists()) {
+//                    employeeData.createNewFile();
+//                }
+//                PrintWriter fileWriter = new PrintWriter(new FileWriter(employeeData, true));
+//                fileWriter.append(cmbCustomerNames.getValue() + " " + txtTimeSpent.getText() + " " + dtpDate.getValue());
+//                fileWriter.println();
+//                fileWriter.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            txtTimeSpent.clear();
+//            Parent root = FXMLLoader.load(getClass().getResource("successfullySavedPopup.fxml"));
+//            Stage primaryStage = new Stage();
+//            primaryStage.setTitle("Data saved");
+//            primaryStage.setScene(new Scene(root, 200, 100));
+//            primaryStage.show();
+//        }
+//    }
+
+//
+//    public void closeSavedWindow(ActionEvent event) {
+//        Stage stage = (Stage) btnCloseSavedWindow.getScene().getWindow();
+//        stage.close();
+//    }
+//
+//    public void closeIncorrectWindow(ActionEvent event) {
+//
+//        Stage stage = (Stage) btnCloseWindow.getScene().getWindow();
+//        stage.close();
+//    }
+//
+//    public void closeProgram(ActionEvent event) {
+//        Platform.exit();
+//    }
+
+    public void LogOut(ActionEvent event) throws IOException {
+        Stage stage = (Stage) myMenuBar.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        System.out.println("AdminLogin.fxml opened");
     }
 }
 
