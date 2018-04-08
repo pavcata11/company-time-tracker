@@ -1,8 +1,10 @@
 Ivan Kamenov
 Username: vankata123           password: 123456789
 Email: vankata123@abv.bg
-Phone Number: 08946473883
-2018/04/04 Work for Rosi Angelova  5 hours
-2018/04/05 Work for Rosi Angelova  3 hours
-2018/04/05 Work for Borislava Koleva  5 hours
-2018/04/05 Work for Boris Dali  11 hours
+Phone Number: 08946473883van
+2018-04-08 Work for Veronika Yakimova 90 minutes
+2018-04-08 Work for Maria Ivancheva 90 minutes
+2018-04-08 Work for Rosi Angelova 29 minutes
+2018-04-08 Work for Maria Ivancheva 60 minutes
+2018-04-08 Work for Boiko Borisov 60 minutes
+2018-04-08 Work for Boris Dali 60 minutes
