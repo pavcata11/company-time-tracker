@@ -20,9 +20,12 @@ public class RemoveUserController implements Initializable {
     public ComboBox cmbSelectCustomer;
     public Button btnRemoveClient;
 
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            removeEmptyLine();
             BufferedReader br = new BufferedReader(new FileReader("Customers"));
             String strLine;
             int flag =0;
@@ -31,13 +34,27 @@ public class RemoveUserController implements Initializable {
                     cmbSelectCustomer.getItems().addAll(strLine);
                 }
                 flag = 1;
-                removeEmptyline();
+
             }
             br.close();
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
-
+    }
+    public void removeEmptyLine() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("Customers"));
+        String line = "";
+        String out = "";
+        while ((line = reader.readLine()) != null) {
+            if (line.length() > 0) {
+                out += line + "\n";
+            }
+        }
+        reader.close();
+        BufferedWriter writer = new BufferedWriter(new FileWriter("Customers"));
+        writer.append(out);
+        writer.close();
+        System.out.println(out);
     }
 
     public void btnRemove(ActionEvent event) {
@@ -55,21 +72,6 @@ public class RemoveUserController implements Initializable {
             e.printStackTrace();
         }
     }
-    public void removeEmptyline() throws IOException {
 
-        BufferedReader reader = new BufferedReader(new FileReader("Customers"));
-        String line = "";
-        String out = "";
-        while ((line = reader.readLine()) != null) {
-            if (line.length() > 0) {
-                out += line + "\n";
-            }
-        }
-        reader.close();
-        BufferedWriter writer = new BufferedWriter(new FileWriter("Customers"));
-        writer.append(out);
-        writer.close();
-        System.out.println(out);
-    }
 }
 
