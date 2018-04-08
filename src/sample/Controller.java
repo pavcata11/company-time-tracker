@@ -24,22 +24,26 @@ public class Controller {
     public ImageView imageView;
     private Stage stage;
 
+
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void clickSignUp(ActionEvent actionEvent) throws IOException {
+    public void checkLoginAsEmpoleeOrLoginAsAdmin(ActionEvent actionEvent) throws IOException {
         lblError.setVisible(false);
 
         if (passwordField.getText().equals("admin") && usernameField.getText().equals("pavel")) {
             System.out.println("YOU login as admin");
             usernameField.setText("");
             passwordField.setText("");
-            LoginAsAdmin();
+
+                LoginAsAdmin();
+
         }
         else {
             try {
-               checkLoginEmployee();
+                checkWhoEmployeeLoginAndCreateFileWithHisUserName();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -51,7 +55,7 @@ public class Controller {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void checkLoginEmployee() throws IOException {
+        public void checkWhoEmployeeLoginAndCreateFileWithHisUserName() throws IOException {
 
         int counter = 0;
         try {
@@ -66,16 +70,12 @@ public class Controller {
                 String username = usernameField.getText();
                 while (fileReader.hasNextLine()) {
                     if (username.equals(fileReader.nextLine()) && password.equals(fileReader.nextLine())) {
-
-                        System.out.println(username);
-
                         System.out.println("You LOGIN AS A Employee");
                         counter++;
-                        LoginAsEmployee();
                         File nameLogin = new File("nameLoginEmployee");
                         BufferedWriter writer = new BufferedWriter(new FileWriter(nameLogin));
                         writer.write(username);
-                        writer.close();
+                        writer.close();LoginAsEmployee();
                     }
                     usernameField.setText("");
                     passwordField.setText("");
@@ -89,6 +89,7 @@ public class Controller {
             System.out.println("Exception Occurred:");
             e.printStackTrace();
         }
+
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +97,7 @@ public class Controller {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    private void LoginAsAdmin() throws IOException{
+    private void LoginAsAdmin() throws IOException {
         stage = (Stage) loginbtn.getScene().getWindow();
         AnchorPane root;
         stage.setTitle("ADMIN SIGN UP");
