@@ -22,50 +22,49 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AdminLogin {
-    public Button logoutbtn;
-    public TextField phoneTextfield;
-    public TextField usernametextfield;
-    public TextField emailtextfield;
-    public PasswordField passwordtextfield;
-    public PasswordField secondpasswordfield;
+    public Button btnLogout;
+    public TextField txtPhone;
+    public TextField txtUsername;
+    public TextField txtEmail;
+    public PasswordField txtPassword;
+    public PasswordField txtPasswordSecond;
     public Separator separator1;
     public Separator separator4;
     public Separator separator3;
     public Separator separator2;
-    public Button btbCheck;
+    public Button btnCheck;
     public Separator separator5;
-    public Label lblemployee;
-    public Label lblusernamebusy;
-    public Label lblusernamefree;
-    public Label lbltitlecustomers;
-    public Label lblpassworderorr;
-    public Label readylbl;
-    public TextField firstnametext;
-    public TextField lastnametext;
-    public TextField phoncecustumerstext;
-    public TextField emailcustomerstext;
-    public MenuItem menuClickLoginOut;
-    public ComboBox combobox1;
-    public MenuItem removecustomersmenu;
-    public Button removebtn;
-    public Separator separatorcustomersEmail;
-    public Separator separatorCustomerslastname;
-    public Separator separatorCustomerspnone;
-    public Separator separatorcustommerfirstname;
-    public ImageView photoAdminImageView;
-    public ImageView photoEnterCustomers;
-    public TextArea TextAreaViewStatiscks;
+    public Label lblEmployee;
+    public Label lblUsernameUsedAlready;
+    public Label lblUsernameFree;
+    public Label lblTitleCustomers;
+    public Label lblPasswordError;
+    public Label lblReady;
+    public TextField txtFirstName;
+    public TextField txtLastName;
+    public TextField txtCustomerPhone;
+    public TextField txtCustomerEmail;
+    public MenuItem miLogout;
+    public ComboBox cmbSelectCustomer;
+    public MenuItem miRemoveCustomer;
+    public Button btnRemove;
+    public Separator separatorCustomerEmail;
+    public Separator separatorCustomerLastName;
+    public Separator separatorCustomerPhone;
+    public Separator separatorCustomerFirstName;
+    public ImageView imgAdmin;
+    public ImageView imgCustomers;
+    public TextArea txtViewStatistics;
     public Button btnSave;
-    public TextField nameTexetfiled;
-    public Separator separtorname;
-    public ComboBox ComboBoxViewStatiscks;
-    public Button viewbtn;
-    public Button Viewhowtimeworkingbtn;
-    public TextField Viewhowtimeworkingtextfield;
+    public TextField txtName;
+    public Separator separatorName;
+    public ComboBox cmbViewStatistics;
+    public Button btnView;
+    public Button btnWorkingTime;
+    public TextField txtWorkingTime;
     private Stage stage;
-    private int flag11 = 0;
     private int flag13 = 0;
-    public  int flagger = 0;
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +79,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void openWelcomePane() throws IOException {
-        stage = (Stage) logoutbtn.getScene().getWindow();
+        stage = (Stage) btnLogout.getScene().getWindow();
         AnchorPane root;
         root = (AnchorPane) FXMLLoader.load(getClass().getResource("sample.fxml"));
         Scene scene = new Scene(root);
@@ -92,41 +91,41 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void clickCustommersVisiableFields(ActionEvent actionEvent) throws IOException {
-        photoAdminImageView.setVisible(false);
-        Viewhowtimeworkingtextfield.setVisible(false);
-        Viewhowtimeworkingbtn.setVisible(false);
-        TextAreaViewStatiscks.setVisible(false);
-        ComboBoxViewStatiscks.setVisible(false);
-        nameTexetfiled.setVisible(false);
-        separtorname.setVisible(false);
-        photoEnterCustomers.setVisible(true);
-        lblpassworderorr.setVisible(false);
-        lblusernamebusy.setVisible(false);
-        lblusernamefree.setVisible(false);
-        readylbl.setVisible(false);
-        usernametextfield.setVisible(false);
-        passwordtextfield.setVisible(false);
-        secondpasswordfield.setVisible(false);
-        emailtextfield.setVisible(false);
-        phoneTextfield.setVisible(false);
+    public void clickCustomersVisibleFields(ActionEvent actionEvent) throws IOException {
+        imgAdmin.setVisible(false);
+        txtWorkingTime.setVisible(false);
+        btnWorkingTime.setVisible(false);
+        txtViewStatistics.setVisible(false);
+        cmbViewStatistics.setVisible(false);
+        txtName.setVisible(false);
+        separatorName.setVisible(false);
+        imgCustomers.setVisible(true);
+        lblPasswordError.setVisible(false);
+        lblUsernameUsedAlready.setVisible(false);
+        lblUsernameFree.setVisible(false);
+        lblReady.setVisible(false);
+        txtUsername.setVisible(false);
+        txtPassword.setVisible(false);
+        txtPasswordSecond.setVisible(false);
+        txtEmail.setVisible(false);
+        txtPhone.setVisible(false);
         separator1.setVisible(false);
         separator2.setVisible(false);
         separator3.setVisible(false);
         separator4.setVisible(false);
         separator5.setVisible(false);
-        btbCheck.setVisible(false);
-        lblemployee.setVisible(false);
-        lbltitlecustomers.setVisible(true);
-        firstnametext.setVisible(true);
-        lastnametext.setVisible(true);
-        emailcustomerstext.setVisible(true);
-        phoncecustumerstext.setVisible(true);
-        separatorcustomersEmail.setVisible(true);
-        separatorCustomerslastname.setVisible(true);
-        separatorCustomerspnone.setVisible(true);
-        separatorcustommerfirstname.setVisible(true);
-        viewbtn.setVisible(false);
+        btnCheck.setVisible(false);
+        lblEmployee.setVisible(false);
+        lblTitleCustomers.setVisible(true);
+        txtFirstName.setVisible(true);
+        txtLastName.setVisible(true);
+        txtCustomerEmail.setVisible(true);
+        txtCustomerPhone.setVisible(true);
+        separatorCustomerEmail.setVisible(true);
+        separatorCustomerLastName.setVisible(true);
+        separatorCustomerPhone.setVisible(true);
+        separatorCustomerFirstName.setVisible(true);
+        btnView.setVisible(false);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,7 +135,7 @@ public class AdminLogin {
     public boolean checkUsername(ActionEvent actionEvent) {
         int counter = 0;
         int flag = 0;
-        String usernameText = usernametextfield.getText();
+        String usernameText = txtUsername.getText();
         File file = new File("empoloyeelist");
         try {
             boolean isCreated = file.createNewFile();
@@ -150,14 +149,14 @@ public class AdminLogin {
                     }
                 }
                 if (counter > 0) {
-                    lblusernamebusy.setVisible(true);
-                    lblusernamefree.setVisible(false);
-                    usernametextfield.setText("");
+                    lblUsernameUsedAlready.setVisible(true);
+                    lblUsernameFree.setVisible(false);
+                    txtUsername.setText("");
                     flag = 1;
                 } else {
 
-                    lblusernamebusy.setVisible(false);
-                    lblusernamefree.setVisible(true);
+                    lblUsernameUsedAlready.setVisible(false);
+                    lblUsernameFree.setVisible(true);
                     flag = 0;
                 }
                 fileReader.close();
@@ -177,14 +176,14 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public boolean checkPassword() {
-        String password = passwordtextfield.getText();
-        String secondPassword = secondpasswordfield.getText();
+        String password = txtPassword.getText();
+        String secondPassword = txtPasswordSecond.getText();
         int flag = 0;
         if (password.equals(secondPassword) && secondPassword.equals(password)) {
-            lblpassworderorr.setVisible(false);
+            lblPasswordError.setVisible(false);
             flag = 1;
         } else {
-            lblpassworderorr.setVisible(true);
+            lblPasswordError.setVisible(true);
             flag = 0;
         }
         if (flag == 1) {
@@ -199,19 +198,19 @@ public class AdminLogin {
 
     public void ClickSave(ActionEvent actionEvent) {
         int flag = 0;
-        if (emailtextfield.getText().equals("") || phoneTextfield.getText().equals("")
-                || passwordtextfield.getText().equals("") || secondpasswordfield.getText().equals("") ||
-                nameTexetfiled.getText().equals("")) {
+        if (txtEmail.getText().equals("") || txtPhone.getText().equals("")
+                || txtPassword.getText().equals("") || txtPasswordSecond.getText().equals("") ||
+                txtName.getText().equals("")) {
             flag = 1;
 
         }
         if (checkUsername(actionEvent) == true && checkPassword() == true && flag == 0 && checkPhoneNumberEmployee() == true &&
-                checkEmailAdress() == true) {
+                checkEmailAddress() == true) {
 
-            lblpassworderorr.setVisible(false);
-            lblusernamebusy.setVisible(false);
-            lblusernamefree.setVisible(false);
-            readylbl.setVisible(false);
+            lblPasswordError.setVisible(false);
+            lblUsernameUsedAlready.setVisible(false);
+            lblUsernameFree.setVisible(false);
+            lblReady.setVisible(false);
             File file = new File("empoloyeelist");
             FileWriter writer;
             try {
@@ -221,12 +220,12 @@ public class AdminLogin {
                 } else {
                     writer = new FileWriter(file, true);
                     PrintWriter printer = new PrintWriter(writer);
-                    printer.append(usernametextfield.getText());
+                    printer.append(txtUsername.getText());
                     printer.println();
-                    printer.append(passwordtextfield.getText());
+                    printer.append(txtPassword.getText());
                     printer.println();
                     printer.close();
-                    readylbl.setVisible(true);
+                    lblReady.setVisible(true);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -254,10 +253,10 @@ public class AdminLogin {
             if (flag == 1 || isCreated == false) {
                 writer = new FileWriter(file, true);
                 PrintWriter printer = new PrintWriter(writer);
-                printer.append(nameTexetfiled.getText());
+                printer.append(txtName.getText());
                 printer.println();
                 printer.close();
-                readylbl.setVisible(true);
+                lblReady.setVisible(true);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -269,7 +268,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void saveInformationForEmployee() {
-        String saveFileName = usernametextfield.getText() + ".txt";
+        String saveFileName = txtUsername.getText() + ".txt";
         File file = new File("EmployeeInformation\\" + saveFileName);
         FileWriter writer;
         int flag = 0;
@@ -282,14 +281,14 @@ public class AdminLogin {
             if (flag == 1 || isCreated == false) {
                 writer = new FileWriter(file, true);
                 PrintWriter printer = new PrintWriter(writer);
-                printer.append(nameTexetfiled.getText());
+                printer.append(txtName.getText());
                 printer.println();
-                printer.append("Username: " + usernametextfield.getText() + "           password: " + passwordtextfield.getText());
+                printer.append("Username: " + txtUsername.getText() + "           password: " + txtPassword.getText());
                 printer.println();
-                printer.append("Email: " + emailtextfield.getText() + "\nPhone Number: " + phoneTextfield.getText());
+                printer.append("Email: " + txtEmail.getText() + "\nPhone Number: " + txtPhone.getText());
                 printer.println();
                 printer.close();
-                readylbl.setVisible(true);
+                lblReady.setVisible(true);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -302,8 +301,8 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void saveCustomers() {
-        if (firstnametext.getText().equals("") || lastnametext.getText().equals("") || phoncecustumerstext.getText().equals("")
-                || phoncecustumerstext.getText().equals("")) {
+        if (txtFirstName.getText().equals("") || txtLastName.getText().equals("") || txtCustomerPhone.getText().equals("")
+                || txtCustomerPhone.getText().equals("")) {
             System.out.println("Error There are empty fields");
         } else {
             File file;
@@ -312,10 +311,10 @@ public class AdminLogin {
             try {
                 writer = new FileWriter(file, true);
                 PrintWriter printer = new PrintWriter(writer);
-                printer.append(firstnametext.getText() + " " + lastnametext.getText());
+                printer.append(txtFirstName.getText() + " " + txtLastName.getText());
                 printer.println();
                 printer.close();
-                readylbl.setVisible(true);
+                lblReady.setVisible(true);
                 AddCustomersNameInComboBox();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -329,7 +328,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void AddCustomersNameInComboBox() {
-        combobox1.getItems().add(firstnametext.getText() + " " + lastnametext.getText());
+        cmbSelectCustomer.getItems().add(txtFirstName.getText() + " " + txtLastName.getText());
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -338,59 +337,59 @@ public class AdminLogin {
 
     public void clearAllFields(ActionEvent actionEvent) {
 
-        lblpassworderorr.setVisible(false);
-        lblusernamebusy.setVisible(false);
-        lblusernamefree.setVisible(false);
-        readylbl.setVisible(false);
-        usernametextfield.setText("");
-        passwordtextfield.setText("");
-        secondpasswordfield.setText("");
-        emailtextfield.setText("");
-        phoneTextfield.setText("");
-        firstnametext.setText("");
-        lastnametext.setText("");
-        emailcustomerstext.setText("");
-        phoncecustumerstext.setText("");
-        nameTexetfiled.setText("");
-        TextAreaViewStatiscks.clear();
+        lblPasswordError.setVisible(false);
+        lblUsernameUsedAlready.setVisible(false);
+        lblUsernameFree.setVisible(false);
+        lblReady.setVisible(false);
+        txtUsername.setText("");
+        txtPassword.setText("");
+        txtPasswordSecond.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
+        txtFirstName.setText("");
+        txtLastName.setText("");
+        txtCustomerEmail.setText("");
+        txtCustomerPhone.setText("");
+        txtName.setText("");
+        txtViewStatistics.clear();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setVisibleNewEmployeeRegist(ActionEvent actionEvent) throws IOException {
-        photoAdminImageView.setVisible(true);
-        photoEnterCustomers.setVisible(false);
-        Viewhowtimeworkingtextfield.setVisible(false);
-        Viewhowtimeworkingbtn.setVisible(false);
+    public void setVisibleNewEmployeeRegistration(ActionEvent actionEvent) throws IOException {
+        imgAdmin.setVisible(true);
+        imgCustomers.setVisible(false);
+        txtWorkingTime.setVisible(false);
+        btnWorkingTime.setVisible(false);
         clearAllFields(actionEvent);
-        lbltitlecustomers.setVisible(false);
-        firstnametext.setVisible(false);
-        lastnametext.setVisible(false);
-        separatorcustomersEmail.setVisible(false);
-        separatorCustomerslastname.setVisible(false);
-        separatorCustomerspnone.setVisible(false);
-        separatorcustommerfirstname.setVisible(false);
-        emailcustomerstext.setVisible(false);
-        phoncecustumerstext.setVisible(false);
-        usernametextfield.setVisible(true);
-        passwordtextfield.setVisible(true);
-        secondpasswordfield.setVisible(true);
-        emailtextfield.setVisible(true);
-        phoneTextfield.setVisible(true);
-        viewbtn.setVisible(false);
+        lblTitleCustomers.setVisible(false);
+        txtFirstName.setVisible(false);
+        txtLastName.setVisible(false);
+        separatorCustomerEmail.setVisible(false);
+        separatorCustomerLastName.setVisible(false);
+        separatorCustomerPhone.setVisible(false);
+        separatorCustomerFirstName.setVisible(false);
+        txtCustomerEmail.setVisible(false);
+        txtCustomerPhone.setVisible(false);
+        txtUsername.setVisible(true);
+        txtPassword.setVisible(true);
+        txtPasswordSecond.setVisible(true);
+        txtEmail.setVisible(true);
+        txtPhone.setVisible(true);
+        btnView.setVisible(false);
         separator1.setVisible(true);
         separator2.setVisible(true);
         separator3.setVisible(true);
         separator4.setVisible(true);
         separator5.setVisible(true);
-        btbCheck.setVisible(true);
-        lblemployee.setVisible(true);
-        TextAreaViewStatiscks.setVisible(false);
-        ComboBoxViewStatiscks.setVisible(false);
-        nameTexetfiled.setVisible(true);
-        separtorname.setVisible(true);
+        btnCheck.setVisible(true);
+        lblEmployee.setVisible(true);
+        txtViewStatistics.setVisible(false);
+        cmbViewStatistics.setVisible(false);
+        txtName.setVisible(true);
+        separatorName.setVisible(true);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -415,13 +414,13 @@ public class AdminLogin {
     }
 
     public void FindAndReplaceRemoveCustomers(ActionEvent actionEvent) {
-        String removeCustomer = (String) combobox1.getValue();
+        String removeCustomer = (String) cmbSelectCustomer.getValue();
         try {
             Path path = Paths.get("Customers");
             Stream<String> lines = Files.lines(path);
             List<String> replaced = lines.map(line -> line.replaceAll(removeCustomer, "")).collect(Collectors.toList());
             Files.write(path, replaced);
-            combobox1.getItems().remove(removeCustomer);
+            cmbSelectCustomer.getItems().remove(removeCustomer);
             lines.close();
             System.out.println("Find and Replace done!!!");
         } catch (IOException e) {
@@ -434,7 +433,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private boolean checkPhoneNumberEmployee() {
-        String phoneNumberIs = phoneTextfield.getText();
+        String phoneNumberIs = txtPhone.getText();
         char textPhone;
         int counter = 0;
         for (int i = 0; i < phoneNumberIs.length(); i++) {
@@ -455,8 +454,8 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private boolean checkEmailAdress() {
-        String emaiiText = emailtextfield.getText();
+    private boolean checkEmailAddress() {
+        String emaiiText = txtEmail.getText();
 
         if (emaiiText.contains("@") || emaiiText.contains(".")) {
             return true;
@@ -467,51 +466,51 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void visiableFieldsEmployeeStatisc(ActionEvent actionEvent) throws IOException {
+    public void visibleFieldsEmployeeStatistics(ActionEvent actionEvent) throws IOException {
         clearAllFields(actionEvent);
-        Viewhowtimeworkingtextfield.setVisible(false);
-        Viewhowtimeworkingbtn.setVisible(true);
-        nameTexetfiled.setVisible(false);
-        separtorname.setVisible(false);
-        photoAdminImageView.setVisible(false);
-        photoEnterCustomers.setVisible(true);
-        lbltitlecustomers.setVisible(false);
-        firstnametext.setVisible(false);
-        lastnametext.setVisible(false);
-        separatorcustomersEmail.setVisible(false);
-        separatorCustomerslastname.setVisible(false);
-        separatorCustomerspnone.setVisible(false);
-        separatorcustommerfirstname.setVisible(false);
-        emailcustomerstext.setVisible(false);
-        phoncecustumerstext.setVisible(false);
-        usernametextfield.setVisible(false);
-        passwordtextfield.setVisible(false);
-        secondpasswordfield.setVisible(false);
-        emailtextfield.setVisible(false);
-        phoneTextfield.setVisible(false);
+        txtWorkingTime.setVisible(false);
+        btnWorkingTime.setVisible(true);
+        txtName.setVisible(false);
+        separatorName.setVisible(false);
+        imgAdmin.setVisible(false);
+        imgCustomers.setVisible(true);
+        lblTitleCustomers.setVisible(false);
+        txtFirstName.setVisible(false);
+        txtLastName.setVisible(false);
+        separatorCustomerEmail.setVisible(false);
+        separatorCustomerLastName.setVisible(false);
+        separatorCustomerPhone.setVisible(false);
+        separatorCustomerFirstName.setVisible(false);
+        txtCustomerEmail.setVisible(false);
+        txtCustomerPhone.setVisible(false);
+        txtUsername.setVisible(false);
+        txtPassword.setVisible(false);
+        txtPasswordSecond.setVisible(false);
+        txtEmail.setVisible(false);
+        txtPhone.setVisible(false);
         separator1.setVisible(false);
         separator2.setVisible(false);
         separator3.setVisible(false);
         separator4.setVisible(false);
         separator5.setVisible(false);
-        btbCheck.setVisible(false);
-        lblemployee.setVisible(false);
+        btnCheck.setVisible(false);
+        lblEmployee.setVisible(false);
 
         //btnSave.setVisible(false);
 
-        ComboBoxViewStatiscks.setVisible(true);
-        TextAreaViewStatiscks.setVisible(true);
-        viewbtn.setVisible(true);
+        cmbViewStatistics.setVisible(true);
+        txtViewStatistics.setVisible(true);
+        btnView.setVisible(true);
 
 
-        createFileWhoCointeinsOnlyNameOfEmployee();
+        createFileWhoContainsOnlyNameOfEmployee();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void createFileWhoCointeinsOnlyNameOfEmployee() {
+    public void createFileWhoContainsOnlyNameOfEmployee() {
         try {
             File file = new File("FileNameEmloyee");
             boolean isCreated = file.createNewFile();
@@ -522,7 +521,7 @@ public class AdminLogin {
                 Scanner fileReader = new Scanner(file);
                 if (flag13 == 0) {
                     while (fileReader.hasNextLine()) {
-                        ComboBoxViewStatiscks.getItems().addAll(fileReader.nextLine());
+                        cmbViewStatistics.getItems().addAll(fileReader.nextLine());
                     }
                     flag13 = 1;
                 }
@@ -538,9 +537,9 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void ViewStatiskClicked(ActionEvent actionEvent) throws IOException {
+    public void ViewStatisticClicked(ActionEvent actionEvent) throws IOException {
 
-            TextAreaViewStatiscks.clear();
+            txtViewStatistics.clear();
                 try {
                     File file = new File("EmployeeInformation\\" + openFileWhoBySelectName());
                     boolean isCreated = file.createNewFile();
@@ -550,7 +549,7 @@ public class AdminLogin {
                         System.out.println("\n" + "File already present at the specified location");
                         Scanner fileReader1 = new Scanner(file);
                         while (fileReader1.hasNextLine()) {
-                            TextAreaViewStatiscks.appendText(fileReader1.nextLine() + " \n");
+                            txtViewStatistics.appendText(fileReader1.nextLine() + " \n");
                         }
                         fileReader1.close();
                     }
@@ -566,16 +565,16 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public String howTimeworkingSetTextInTextField() throws FileNotFoundException {
+    public String howTimeWorkingSetTextInTextField() throws FileNotFoundException {
         String howSratsWorkindHowWorkingHowFinishedWorking = null;
         String firstWordHowStartsWorking = "";
         LocalDate localDate = LocalDate.now();
         System.out.println(firstWordHowStartsWorking);
         howSratsWorkindHowWorkingHowFinishedWorking = "Do: " + DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
         howSratsWorkindHowWorkingHowFinishedWorking = howSratsWorkindHowWorkingHowFinishedWorking +
-                " The employee has worked for " + readOnlyInregerHowTimeWorking() + " minutes";
+                " The employee has worked for " + readOnlyIntegerHowTimeWorking() + " minutes";
         System.out.println(howSratsWorkindHowWorkingHowFinishedWorking);
-        System.out.println(readOnlyInregerHowTimeWorking());
+        System.out.println(readOnlyIntegerHowTimeWorking());
         return  howSratsWorkindHowWorkingHowFinishedWorking;
     }
 
@@ -583,7 +582,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double readOnlyInregerHowTimeWorking() throws FileNotFoundException {
+    public double readOnlyIntegerHowTimeWorking() throws FileNotFoundException {
         double sum = 0;
         int lines = 0,count = 0, i =0;
         File file = new File("EmployeeInformation\\" + openFileWhoBySelectName());
@@ -625,7 +624,7 @@ public class AdminLogin {
             if (file.isFile()) {
                 fileReader = new Scanner(file, "UTF-8");
                 while (fileReader.hasNextLine()) {
-                    if (fileReader.nextLine().equals((String) ComboBoxViewStatiscks.getValue())) {
+                    if (fileReader.nextLine().equals((String) cmbViewStatistics.getValue())) {
                         System.out.println(file.getName());
                         filename = file.getName();
                     }
@@ -640,9 +639,9 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void Viewhowtimeworking(ActionEvent actionEvent) throws IOException {
-        Viewhowtimeworkingtextfield.setVisible(true);
-          Viewhowtimeworkingtextfield.setText(howTimeworkingSetTextInTextField());
+    public void viewHowTimeWorking(ActionEvent actionEvent) throws IOException {
+        txtWorkingTime.setVisible(true);
+          txtWorkingTime.setText(howTimeWorkingSetTextInTextField());
     }
 }
 

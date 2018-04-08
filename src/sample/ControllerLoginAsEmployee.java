@@ -25,7 +25,8 @@ public class ControllerLoginAsEmployee implements Initializable {
     public TextField txtTimeSpent;
     public Button btnWriteData;
     public DatePicker dtpDate;
-
+    public Button btnCloseSavedWindow;
+    public Button btnCloseWindow;
 
     public String getNameWhoLogin()  { String line = "";
         File file = new File("nameLoginEmployee");
@@ -64,96 +65,53 @@ public class ControllerLoginAsEmployee implements Initializable {
 
 
 
-
-
-    public void WriteData(ActionEvent actionEvent) {
-        File file = new File("EmployeeInformation\\" + userWhoNameInSystem);
-        FileWriter writer;
-
-        try {
-
-            boolean isCreated = file.createNewFile();
-            if (isCreated) {
-                System.out.println("File has been created successfully");
-
-            } else {
-
-                writer = new FileWriter(file, true);
-                PrintWriter printer = new PrintWriter(writer);
-                int ConvertMinutesStringToMinutesInt = Integer.parseInt(txtTimeSpent.getText());
-                printer.append(dtpDate.getValue().toString()+" " + "Work for "+cmbCustomerNames.getValue().toString()+" "+ ( ConvertMinutesStringToMinutesInt + " minutes" + "\n"));
-                printer.close();
-                dtpDate.setAccessibleText("");
-
-            }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-    }
-
-
     public void closeProgram(ActionEvent actionEvent) {
         System.exit(0);
     }
 
 
-////
-    ///
-    ////
 
-    ////
 
-/////// tva go trii ne ni trqbva zasega mai ostavi go da sedi ne prechi /////
-    ///
-    ///
-    ////
+    public void WriteData(ActionEvent event) throws IOException {
+       if (cmbCustomerNames.getValue() == null || txtTimeSpent.getText().isEmpty() || dtpDate.getValue() == null) {
+           Parent root = FXMLLoader.load(getClass().getResource("incorrectDataPopup.fxml"));
+           Stage primaryStage = new Stage();
+            primaryStage.setTitle("Incorrect data");
+           primaryStage.setScene(new Scene(root, 260, 120));
+           primaryStage.show();
+       } else {
+            File employeeData = new File("employeeData.txt");
+           try {
+               if (!employeeData.exists()) {
+                   employeeData.createNewFile();
+               }
+               PrintWriter fileWriter = new PrintWriter(new FileWriter(employeeData, true));
+               fileWriter.append(cmbCustomerNames.getValue() + " " + txtTimeSpent.getText() + " " + dtpDate.getValue());
+                fileWriter.println();
+               fileWriter.close();
+           } catch (IOException e) {
+               e.printStackTrace();
+          }
+           txtTimeSpent.clear();
+           Parent root = FXMLLoader.load(getClass().getResource("successfullySavedPopup.fxml"));
+            Stage primaryStage = new Stage();
+          primaryStage.setTitle("Data saved");
+           primaryStage.setScene(new Scene(root, 270, 150));
+           primaryStage.show();
+       }
+    }
 
-//    public void WriteData(ActionEvent event) throws IOException {
-//        if (cmbCustomerNames.getValue() == null || txtTimeSpent.getText().isEmpty() || dtpDate.getValue() == null) {
-//            Parent root = FXMLLoader.load(getClass().getResource("incorrectDataPopup.fxml"));
-//            Stage primaryStage = new Stage();
-//            primaryStage.setTitle("Incorrect data");
-//            primaryStage.setScene(new Scene(root, 200, 100));
-//            primaryStage.show();
-//        } else {
-//            File employeeData = new File("employeeData.txt");
-//            try {
-//                if (!employeeData.exists()) {
-//                    employeeData.createNewFile();
-//                }
-//                PrintWriter fileWriter = new PrintWriter(new FileWriter(employeeData, true));
-//                fileWriter.append(cmbCustomerNames.getValue() + " " + txtTimeSpent.getText() + " " + dtpDate.getValue());
-//                fileWriter.println();
-//                fileWriter.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            txtTimeSpent.clear();
-//            Parent root = FXMLLoader.load(getClass().getResource("successfullySavedPopup.fxml"));
-//            Stage primaryStage = new Stage();
-//            primaryStage.setTitle("Data saved");
-//            primaryStage.setScene(new Scene(root, 200, 100));
-//            primaryStage.show();
-//        }
-//    }
 
-//
-//    public void closeSavedWindow(ActionEvent event) {
-//        Stage stage = (Stage) btnCloseSavedWindow.getScene().getWindow();
-//        stage.close();
-//    }
-//
-//    public void closeIncorrectWindow(ActionEvent event) {
-//
-//        Stage stage = (Stage) btnCloseWindow.getScene().getWindow();
-//        stage.close();
-//    }
-//
-//    public void closeProgram(ActionEvent event) {
-//        Platform.exit();
-//    }
+    public void closeSavedWindow(ActionEvent event) {
+        Stage stage = (Stage) btnCloseSavedWindow.getScene().getWindow();
+        stage.close();
+    }
+
+   public void closeIncorrectWindow(ActionEvent event) {
+
+       Stage stage = (Stage) btnCloseWindow.getScene().getWindow();
+       stage.close();
+   }
 
     public void LogOut(ActionEvent event) throws IOException {
         Stage stage = (Stage) myMenuBar.getScene().getWindow();

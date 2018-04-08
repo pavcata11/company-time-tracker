@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="149.0" prefWidth="272.0" style="-fx-background-color: #292929;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLoginAsEmployee">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="149.0" prefWidth="277.0" style="-fx-background-color: #292929;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLoginAsEmployee">
    <children>
-      <Label fx:id="lblMessage" layoutX="41.0" layoutY="22.0" text="Data successfully saved!" textFill="#cccccc" />
-      <Button fx:id="btnCloseSavedWindow" layoutX="112.0" layoutY="75.0" mnemonicParsing="false" onAction="#closeSavedWindow" style="-fx-background-color: #7400ac;" text="Ok" textFill="#cccccc">
+      <Label fx:id="lblMessage" layoutX="41.0" layoutY="28.0" text="Data successfully saved!" textFill="#cccccc" />
+      <Button fx:id="btnCloseSavedWindow" layoutX="116.0" layoutY="75.0" mnemonicParsing="false" onAction="#closeSavedWindow" style="-fx-background-color: #7400ac;" text="Ok" textFill="#cccccc">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
