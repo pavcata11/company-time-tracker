@@ -71,34 +71,40 @@ public class ControllerLoginAsEmployee implements Initializable {
 
 
 
-
-    public void WriteData(ActionEvent event) throws IOException {
-       if (cmbCustomerNames.getValue() == null || txtTimeSpent.getText().isEmpty() || dtpDate.getValue() == null) {
-           Parent root = FXMLLoader.load(getClass().getResource("incorrectDataPopup.fxml"));
-           Stage primaryStage = new Stage();
-            primaryStage.setTitle("Incorrect data");
-           primaryStage.setScene(new Scene(root, 260, 120));
-           primaryStage.show();
-       } else {
-            File employeeData = new File("employeeData.txt");
-           try {
-               if (!employeeData.exists()) {
-                   employeeData.createNewFile();
-               }
-               PrintWriter fileWriter = new PrintWriter(new FileWriter(employeeData, true));
-               fileWriter.append(cmbCustomerNames.getValue() + " " + txtTimeSpent.getText() + " " + dtpDate.getValue());
-                fileWriter.println();
-               fileWriter.close();
-           } catch (IOException e) {
-               e.printStackTrace();
-          }
-           txtTimeSpent.clear();
-           Parent root = FXMLLoader.load(getClass().getResource("successfullySavedPopup.fxml"));
+    public void WriteData(ActionEvent actionEvent) throws IOException {
+        if (cmbCustomerNames.getValue() == null || txtTimeSpent.getText().isEmpty() || dtpDate.getValue() == null) {
+            Parent root = FXMLLoader.load(getClass().getResource("incorrectDataPopup.fxml"));
             Stage primaryStage = new Stage();
-          primaryStage.setTitle("Data saved");
-           primaryStage.setScene(new Scene(root, 270, 150));
-           primaryStage.show();
-       }
+            primaryStage.setTitle("Incorrect data");
+            primaryStage.setScene(new Scene(root, 260, 120));
+            primaryStage.show();
+        } else {
+            File file = new File("EmployeeInformation\\" + userWhoNameInSystem);
+            FileWriter writer;
+
+
+            try {
+
+                boolean isCreated = file.createNewFile();
+                if (isCreated) {
+                    System.out.println("File has been created successfully");
+
+                } else {
+
+                    writer = new FileWriter(file, true);
+                    PrintWriter printer = new PrintWriter(writer);
+                    int ConvertMinutesStringToMinutesInt = Integer.parseInt(txtTimeSpent.getText());
+                    printer.append(dtpDate.getValue().toString() + " " + "Work for " + cmbCustomerNames.getValue().toString() + " " + (ConvertMinutesStringToMinutesInt + " minutes" + "\n"));
+                    printer.close();
+                    dtpDate.setAccessibleText("");
+
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
     }
 
 
@@ -124,5 +130,3 @@ public class ControllerLoginAsEmployee implements Initializable {
         System.out.println("AdminLogin.fxml opened");
     }
 }
-
-
