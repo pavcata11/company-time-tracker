@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="company-time-tracker:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/company_time_tracker_jar</output-path>
+    <root id="archive" name="company-time-tracker.jar">
+      <element id="module-output" name="company-time-tracker" />
+    </root>
+  </artifact>
+</component>
