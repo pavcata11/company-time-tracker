@@ -29,7 +29,7 @@
                                        prefWidth="312.0" promptText="Password"
                                        style="-fx-background-color: #1C1B21; -fx-text-fill: #CECECE;"/>
                         <Button fx:id="loginbtn" layoutX="106.0" layoutY="347.0" mnemonicParsing="false"
-                                onAction="#clickSignUp" prefHeight="57.0" prefWidth="206.0"
+                                onAction="#checkLoginAsEmpoleeOrLoginAsAdmin" prefHeight="57.0" prefWidth="206.0"
                                 style="-fx-background-color: #7400AC;" text="Sign up" textFill="WHITE">
                             <font>
                                 <Font name="Forte" size="30.0"/>
@@ -77,6 +77,13 @@
                         <Font size="16.0"/>
                     </font>
                 </Label>
+                <ImageView fitHeight="343.0" fitWidth="345.0" layoutX="141.0" layoutY="340.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@Lets-Work-Together1.png"/>
+                    </image>
+                </ImageView>
+
             </children>
         </AnchorPane>
     </children>
