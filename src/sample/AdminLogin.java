@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,7 +19,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 
 public class AdminLogin {
     public Button logoutbtn;
@@ -66,33 +64,26 @@ public class AdminLogin {
     private Stage stage;
     private int flag11 = 0;
     private int flag13 = 0;
+    public  int flagger = 0;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void Logout(ActionEvent actionEvent) {
-        try {
-            openLogin();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void Logout(ActionEvent actionEvent) throws IOException {
+        openWelcomePane();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @FXML
-    public void openLogin() throws IOException {
-
+    public void openWelcomePane() throws IOException {
         stage = (Stage) logoutbtn.getScene().getWindow();
         AnchorPane root;
-        //stage.setTitle("Login as Admin");
         root = (AnchorPane) FXMLLoader.load(getClass().getResource("sample.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         System.out.println("Login.fxml opened");
     }
 
@@ -100,7 +91,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void entercustomers(ActionEvent actionEvent) throws IOException {
+    public void clickCustommersVisiableFields(ActionEvent actionEvent) throws IOException {
         photoAdminImageView.setVisible(false);
         Viewhowtimeworkingtextfield.setVisible(false);
         Viewhowtimeworkingbtn.setVisible(false);
@@ -146,7 +137,6 @@ public class AdminLogin {
         int flag = 0;
         String usernameText = usernametextfield.getText();
         File file = new File("empoloyeelist");
-
         try {
             boolean isCreated = file.createNewFile();
             if (isCreated) {
@@ -168,15 +158,12 @@ public class AdminLogin {
                     lblusernamebusy.setVisible(false);
                     lblusernamefree.setVisible(true);
                     flag = 0;
-
                 }
                 fileReader.close();
             }
-
         } catch (IOException e1) {
             System.out.println("Exception Occurred:");
             e1.printStackTrace();
-
         }
         if (flag == 1) {
             return false;
@@ -189,12 +176,9 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public boolean checkPassword() {
-
         String password = passwordtextfield.getText();
         String secondPassword = secondpasswordfield.getText();
         int flag = 0;
-
-
         if (password.equals(secondPassword) && secondPassword.equals(password)) {
             lblpassworderorr.setVisible(false);
             flag = 1;
@@ -220,7 +204,7 @@ public class AdminLogin {
             flag = 1;
 
         }
-        if (checkUsername(actionEvent) == true && checkPassword() == true && flag == 0 && checPhoneNumberEmployee() == true &&
+        if (checkUsername(actionEvent) == true && checkPassword() == true && flag == 0 && checkPhoneNumberEmployee() == true &&
                 checkEmailAdress() == true) {
 
             lblpassworderorr.setVisible(false);
@@ -244,11 +228,10 @@ public class AdminLogin {
                     readylbl.setVisible(true);
                 }
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             saveInformationForEmployee();
-            nameSomeEmployeerList();
+            saveOnlyNamesOnSuccessfullyRegistrationInFile();
         }
         saveCustomers();
     }
@@ -257,7 +240,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void nameSomeEmployeerList() {
+    public void saveOnlyNamesOnSuccessfullyRegistrationInFile() {
         File file = new File("FileNameEmloyee");
         FileWriter writer;
         int flag = 0;
@@ -276,7 +259,6 @@ public class AdminLogin {
                 readylbl.setVisible(true);
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -287,7 +269,6 @@ public class AdminLogin {
 
     public void saveInformationForEmployee() {
         String saveFileName = usernametextfield.getText() + ".txt";
-
         File file = new File("EmployeeInformation\\" + saveFileName);
         FileWriter writer;
         int flag = 0;
@@ -310,7 +291,6 @@ public class AdminLogin {
                 readylbl.setVisible(true);
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -325,39 +305,37 @@ public class AdminLogin {
                 || phoncecustumerstext.getText().equals("")) {
             System.out.println("Error There are empty fields");
         } else {
-            File file = new File("Customers");
-            boolean isCreated = false;
+            File file;
+            file = new File("Customers");
+            FileWriter writer;
             try {
-                isCreated = file.createNewFile();
-            } catch (IOException e1) {
-                e1.printStackTrace();
+                writer = new FileWriter(file, true);
+                PrintWriter printer = new PrintWriter(writer);
+                printer.append(firstnametext.getText() + " " + lastnametext.getText());
+                printer.println();
+                printer.close();
+                readylbl.setVisible(true);
+                AddCustomersNameInComboBox();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            if (isCreated) {
-                System.out.println("File has been created successfully");
-            } else {
-                file = new File("Customers");
-                FileWriter writer;
-                try {
-                    writer = new FileWriter(file, true);
-                    PrintWriter printer = new PrintWriter(writer);
-                    printer.append(firstnametext.getText() + " " + lastnametext.getText());
-                    printer.println();
-                    printer.close();
-                    readylbl.setVisible(true);
-                    combobox1.getItems().add(firstnametext.getText() + " " + lastnametext.getText());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+
         }
 
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void AddCustomersNameInComboBox() {
+        combobox1.getItems().add(firstnametext.getText() + " " + lastnametext.getText());
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void newClear(ActionEvent actionEvent) {
+    public void clearAllFields(ActionEvent actionEvent) {
 
         lblpassworderorr.setVisible(false);
         lblusernamebusy.setVisible(false);
@@ -368,24 +346,24 @@ public class AdminLogin {
         secondpasswordfield.setText("");
         emailtextfield.setText("");
         phoneTextfield.setText("");
-        // lbltitlecustomers.setText("");
         firstnametext.setText("");
         lastnametext.setText("");
         emailcustomerstext.setText("");
         phoncecustumerstext.setText("");
         nameTexetfiled.setText("");
+        TextAreaViewStatiscks.clear();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void registNewEmployee(ActionEvent actionEvent) throws IOException {
+    public void setVisibleNewEmployeeRegist(ActionEvent actionEvent) throws IOException {
         photoAdminImageView.setVisible(true);
         photoEnterCustomers.setVisible(false);
         Viewhowtimeworkingtextfield.setVisible(false);
         Viewhowtimeworkingbtn.setVisible(false);
-        newClear(actionEvent);
+        clearAllFields(actionEvent);
         lbltitlecustomers.setVisible(false);
         firstnametext.setVisible(false);
         lastnametext.setVisible(false);
@@ -427,7 +405,6 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void removeCustomers(ActionEvent actionEvent) {
-
         if (removecustomersmenu.isSelected()) {
             combobox1.setVisible(true);
             removebtn.setVisible(true);
@@ -440,17 +417,10 @@ public class AdminLogin {
                 } else {
                     System.out.println("File already present at the specified location");
                     Scanner fileReader = new Scanner(file);
-                    // int lineNumber = 0;
-                    int counter = 0;
-
-                    removeEmptyline();
+                    removeEmptyLineInFileCustomers();
                     if (flag11 == 0) {
                         while (fileReader.hasNextLine()) {
-
-                            //combobox.addItem(fileReader.nextLine());
-
                             combobox1.getItems().addAll(fileReader.nextLine());
-
                         }
                         flag11 = 1;
                     }
@@ -471,8 +441,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void removeEmptyline() throws IOException {
-
+    public void removeEmptyLineInFileCustomers() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("Customers"));
         String line = "";
         String out = "";
@@ -493,9 +462,8 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //this is btn //
-    public void remove(ActionEvent actionEvent) {
+    public void FindAndReplaceRemoveCustomers(ActionEvent actionEvent) {
         String removeCustomer = (String) combobox1.getValue();
-
         try {
             Path path = Paths.get("Customers");
             Stream<String> lines = Files.lines(path);
@@ -513,7 +481,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private boolean checPhoneNumberEmployee() {
+    private boolean checkPhoneNumberEmployee() {
         String phoneNumberIs = phoneTextfield.getText();
         char textPhone;
         int counter = 0;
@@ -547,8 +515,8 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void checkViewEmployeeStatics(ActionEvent actionEvent) throws IOException {
-        newClear(actionEvent);
+    public void visiableFieldsEmployeeStatisc(ActionEvent actionEvent) throws IOException {
+        clearAllFields(actionEvent);
         Viewhowtimeworkingtextfield.setVisible(false);
         Viewhowtimeworkingbtn.setVisible(true);
         nameTexetfiled.setVisible(false);
@@ -576,16 +544,22 @@ public class AdminLogin {
         separator5.setVisible(false);
         btbCheck.setVisible(false);
         lblemployee.setVisible(false);
-        ////////
-        ///.....//
-        ////
-
 
         //btnSave.setVisible(false);
+
         ComboBoxViewStatiscks.setVisible(true);
         TextAreaViewStatiscks.setVisible(true);
-
         viewbtn.setVisible(true);
+
+
+        createFileWhoCointeinsOnlyNameOfEmployee();
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void createFileWhoCointeinsOnlyNameOfEmployee() {
         try {
             File file = new File("FileNameEmloyee");
             boolean isCreated = file.createNewFile();
@@ -597,24 +571,100 @@ public class AdminLogin {
                 if (flag13 == 0) {
                     while (fileReader.hasNextLine()) {
                         ComboBoxViewStatiscks.getItems().addAll(fileReader.nextLine());
-
                     }
                     flag13 = 1;
                 }
                 fileReader.close();
             }
-
         } catch (IOException e) {
             System.out.println("Exception Occurred:");
             e.printStackTrace();
         }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void ViewStatiskClicked(ActionEvent actionEvent) throws IOException {
+
+            TextAreaViewStatiscks.clear();
+                try {
+                    File file = new File("EmployeeInformation\\" + openFileWhoBySelectName());
+                    boolean isCreated = file.createNewFile();
+                    if (isCreated) {
+                        System.out.println("File has been created successfully");
+                    } else {
+                        System.out.println("\n" + "File already present at the specified location");
+                        Scanner fileReader1 = new Scanner(file);
+                        while (fileReader1.hasNextLine()) {
+                            TextAreaViewStatiscks.appendText(fileReader1.nextLine() + " \n");
+                        }
+                        fileReader1.close();
+                    }
+                } catch (IOException e) {
+                    System.out.println("Exception Occurred:");
+                    e.printStackTrace();
+
+            }
 
     }
 
-    public String ViewStatiskClicked(ActionEvent actionEvent) throws IOException {
-        TextAreaViewStatiscks.clear();
-        Scanner fileReader = null;
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public String howTimeworkingSetTextInTextField() throws FileNotFoundException {
         String howSratsWorkindHowWorkingHowFinishedWorking = null;
+        String firstWordHowStartsWorking = "";
+        LocalDate localDate = LocalDate.now();
+        System.out.println(firstWordHowStartsWorking);
+        howSratsWorkindHowWorkingHowFinishedWorking = "Do: " + DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
+        howSratsWorkindHowWorkingHowFinishedWorking = howSratsWorkindHowWorkingHowFinishedWorking +
+                " The employee has worked for " + readOnlyInregerHowTimeWorking() + " minutes";
+        System.out.println(howSratsWorkindHowWorkingHowFinishedWorking);
+        System.out.println(readOnlyInregerHowTimeWorking());
+        return  howSratsWorkindHowWorkingHowFinishedWorking;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public double readOnlyInregerHowTimeWorking() throws FileNotFoundException {
+        double sum = 0;
+        int lines = 0,count = 0, i =0;
+        File file = new File("EmployeeInformation\\" + openFileWhoBySelectName());
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            count++;
+            scanner.nextLine();
+            if (count >= 4) {
+
+                List<Integer> integers = new ArrayList<>();
+                while (scanner.hasNext()) {
+                    if (scanner.hasNextInt()) {
+                        integers.add(scanner.nextInt());
+
+                    } else {
+                        scanner.next();
+                    }
+                }
+                for (i = 0; i < integers.size(); i++) {
+                    sum += integers.get(i);
+                }
+            }
+        }
+        return sum;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public String openFileWhoBySelectName() throws FileNotFoundException {
+        Scanner fileReader = null;
         String filename = null;
         File folder = new File("EmployeeInformation\\");
         File[] listOfFiles = folder.listFiles();
@@ -626,86 +676,21 @@ public class AdminLogin {
                     if (fileReader.nextLine().equals((String) ComboBoxViewStatiscks.getValue())) {
                         System.out.println(file.getName());
                         filename = file.getName();
-                        String line;
-                        String firstWordHowStartsWorking = "";
-                        int i = 0, flagger = 0;
-                        if (flagger == 0) {
-                            try (Stream<String> lines = Files.lines(Paths.get("EmployeeInformation\\" + filename))) {
-                                flagger = 1;
-                                line = lines.skip(4).findFirst().get();
-                                while (line.charAt(i) != ' ') {
-                                    //   System.out.print(line.charAt(i));
-                                    firstWordHowStartsWorking = firstWordHowStartsWorking + line.charAt(i);
-                                    i++;
-                                }
-                                LocalDate localDate = LocalDate.now();
-                                System.out.println(firstWordHowStartsWorking);
-                                howSratsWorkindHowWorkingHowFinishedWorking = "From: " + firstWordHowStartsWorking + " To "
-                                        + DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
-                            }
-                            i = 0;
-                            line = "";
-                        }
-                        try {
-                            file = new File("EmployeeInformation\\" + filename);
-                            boolean isCreated = file.createNewFile();
-                            if (isCreated) {
-                                System.out.println("File has been created successfully");
-                            } else {
-                                System.out.println("\n" + "File already present at the specified location");
-                                Scanner fileReader1 = new Scanner(file);
-                                while (fileReader1.hasNextLine()) {
-                                    TextAreaViewStatiscks.appendText(fileReader1.nextLine() + " \n");
-                                }
-                                fileReader1.close();
-                            }
-                        } catch (IOException e) {
-                            System.out.println("Exception Occurred:");
-                            e.printStackTrace();
-                        }
-                        sum = 0;
-                        int lines = 0;
-                        int count = 0;
-                        file = new File("EmployeeInformation\\" + filename);
-                        Scanner scanner = new Scanner(file);
-                        while (scanner.hasNextLine()) {
-                            count++;
-                            scanner.nextLine();
-                            if (count >= 4) {
-
-                                List<Integer> integers = new ArrayList<>();
-                                while (scanner.hasNext()) {
-                                    if (scanner.hasNextInt()) {
-                                        integers.add(scanner.nextInt());
-
-                                    } else {
-                                        scanner.next();
-                                    }
-                                }
-                                for (i = 0; i < integers.size(); i++) {
-                                    sum += integers.get(i);
-                                }
-                            }
-                        }
                     }
                 }
             }
-
         }
-
-        howSratsWorkindHowWorkingHowFinishedWorking = howSratsWorkindHowWorkingHowFinishedWorking +
-                " The employee has worked for " + sum + " hours";
-        System.out.println(howSratsWorkindHowWorkingHowFinishedWorking);
-        System.out.println(sum);
         fileReader.close();
-        return howSratsWorkindHowWorkingHowFinishedWorking;
-
-
+        return filename;
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void Viewhowtimeworking(ActionEvent actionEvent) throws IOException {
         Viewhowtimeworkingtextfield.setVisible(true);
-          Viewhowtimeworkingtextfield.setText(ViewStatiskClicked(actionEvent));
+          Viewhowtimeworkingtextfield.setText(howTimeworkingSetTextInTextField());
     }
 }
 
