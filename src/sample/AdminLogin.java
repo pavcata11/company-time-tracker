@@ -59,7 +59,7 @@ public class AdminLogin {
     public TextField txtName;
     public Separator separatorName;
     public ComboBox cmbViewStatistics;
-    public Button btnView;
+    public Button btnViewData;
     public Button btnWorkingTime;
     public TextField txtWorkingTime;
     private Stage stage;
@@ -124,7 +124,7 @@ public class AdminLogin {
         separatorCustomerLastName.setVisible(true);
         separatorCustomerPhone.setVisible(true);
         separatorCustomerFirstName.setVisible(true);
-        btnView.setVisible(false);
+        btnViewData.setVisible(false);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -371,7 +371,7 @@ public class AdminLogin {
         txtPasswordSecond.setVisible(true);
         txtEmail.setVisible(true);
         txtPhone.setVisible(true);
-        btnView.setVisible(false);
+        btnViewData.setVisible(false);
         separator1.setVisible(true);
         separator2.setVisible(true);
         separator3.setVisible(true);
@@ -487,7 +487,7 @@ public class AdminLogin {
         lblEmployee.setVisible(false);
         cmbViewStatistics.setVisible(true);
         txtViewStatistics.setVisible(true);
-        btnView.setVisible(true);
+        btnViewData.setVisible(true);
         createFileWhoContainsOnlyNameOfEmployee();
     }
 
@@ -624,9 +624,3 @@ public class AdminLogin {
         txtWorkingTime.setText(howTimeWorkingSetTextInTextField());
     }
 }
-
-
-
-
-
-
