@@ -15,8 +15,6 @@ import java.util.Scanner;
 
 public class ControllerLoginAsEmployee implements Initializable {
 
-
-
     public String userWhoNameInSystem = getNameWhoLogin() + ".txt";
     public MenuBar myMenuBar;
     public MenuItem miCloseProgram;
@@ -41,8 +39,6 @@ public class ControllerLoginAsEmployee implements Initializable {
         return line;
     }
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println(userWhoNameInSystem);
@@ -62,14 +58,9 @@ public class ControllerLoginAsEmployee implements Initializable {
         }
     }
 
-
-
-
     public void closeProgram(ActionEvent actionEvent) {
         System.exit(0);
     }
-
-
 
     public void WriteData(ActionEvent actionEvent) throws IOException {
         if (cmbCustomerNames.getValue() == null || txtTimeSpent.getText().isEmpty() || dtpDate.getValue() == null) {
@@ -78,10 +69,15 @@ public class ControllerLoginAsEmployee implements Initializable {
             primaryStage.setTitle("Incorrect data");
             primaryStage.setScene(new Scene(root, 260, 120));
             primaryStage.show();
+
         } else {
+            Parent root = FXMLLoader.load(getClass().getResource("successfullySavedPopup.fxml"));
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("Data saved");
+            primaryStage.setScene(new Scene(root, 260, 120));
+            primaryStage.show();
             File file = new File("EmployeeInformation\\" + userWhoNameInSystem);
             FileWriter writer;
-
 
             try {
 
@@ -104,9 +100,7 @@ public class ControllerLoginAsEmployee implements Initializable {
                 e.printStackTrace();
             }
         }
-
     }
-
 
     public void closeSavedWindow(ActionEvent event) {
         Stage stage = (Stage) btnCloseSavedWindow.getScene().getWindow();
