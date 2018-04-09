@@ -20,27 +20,25 @@ public class RemoveUserController implements Initializable {
     public ComboBox cmbSelectCustomer;
     public Button btnRemoveClient;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             removeEmptyLine();
             BufferedReader br = new BufferedReader(new FileReader("Customers"));
             String strLine;
-            int flag =0;
+            int flag = 0;
             if (flag == 0) {
                 while ((strLine = br.readLine()) != null) {
                     cmbSelectCustomer.getItems().addAll(strLine);
                 }
                 flag = 1;
-
             }
             br.close();
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
+
     public void removeEmptyLine() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("Customers"));
         String line = "";
@@ -59,7 +57,6 @@ public class RemoveUserController implements Initializable {
 
     public void btnRemove(ActionEvent event) {
         String removeCustomer = (String) cmbSelectCustomer.getValue();
-
         try {
             Path path = Paths.get("Customers");
             Stream<String> lines = Files.lines(path);
@@ -72,6 +69,4 @@ public class RemoveUserController implements Initializable {
             e.printStackTrace();
         }
     }
-
 }
-
