@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -24,8 +25,6 @@ public class Controller {
     public ImageView imageView;
     private Stage stage;
 
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,25 +36,21 @@ public class Controller {
             System.out.println("YOU login as admin");
             usernameField.setText("");
             passwordField.setText("");
-
-                LoginAsAdmin();
-
-        }
-        else {
+            LoginAsAdmin();
+        } else {
             try {
                 checkWhoEmployeeLoginAndCreateFileWithHisUserName();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public void checkWhoEmployeeLoginAndCreateFileWithHisUserName() throws IOException {
+    public void checkWhoEmployeeLoginAndCreateFileWithHisUserName() throws IOException {
 
         int counter = 0;
         try {
@@ -63,7 +58,6 @@ public class Controller {
             boolean isCreated = file.createNewFile();
             if (isCreated) {
                 System.out.println("File has been created successfully");
-
             } else {
                 Scanner fileReader = new Scanner(file);
                 String password = passwordField.getText();
@@ -75,7 +69,8 @@ public class Controller {
                         File nameLogin = new File("nameLoginEmployee");
                         BufferedWriter writer = new BufferedWriter(new FileWriter(nameLogin));
                         writer.write(username);
-                        writer.close();LoginAsEmployee();
+                        writer.close();
+                        LoginAsEmployee();
                     }
                     usernameField.setText("");
                     passwordField.setText("");
@@ -89,7 +84,6 @@ public class Controller {
             System.out.println("Exception Occurred:");
             e.printStackTrace();
         }
-
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,7 +94,7 @@ public class Controller {
     private void LoginAsAdmin() throws IOException {
         stage = (Stage) loginbtn.getScene().getWindow();
         AnchorPane root;
-        stage.setTitle("ADMIN SIGN UP");
+        stage.setTitle("Admin window");
         root = (AnchorPane) FXMLLoader.load(getClass().getResource("AdminLogin.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -111,18 +105,19 @@ public class Controller {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
- private  void   LoginAsEmployee()throws IOException{
-     stage = (Stage) loginbtn.getScene().getWindow();
-     AnchorPane root;
-     stage.setTitle("EMPLOYEE SIGN UP");
-     root = (AnchorPane) FXMLLoader.load(getClass().getResource("LoginAsEmployee.fxml"));
-     Scene scene = new Scene(root);
-     stage.setScene(scene);
-     System.out.println("LoginAsEmployee.fxml opened");
- }
+    private void LoginAsEmployee() throws IOException {
+        stage = (Stage) loginbtn.getScene().getWindow();
+        AnchorPane root;
+        stage.setTitle("Employee protocol");
+        root = (AnchorPane) FXMLLoader.load(getClass().getResource("LoginAsEmployee.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        System.out.println("LoginAsEmployee.fxml opened");
+    }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
+
 
 
