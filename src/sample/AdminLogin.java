@@ -65,7 +65,6 @@ public class AdminLogin {
     private Stage stage;
     private int flag13 = 0;
 
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -202,11 +201,9 @@ public class AdminLogin {
                 || txtPassword.getText().equals("") || txtPasswordSecond.getText().equals("") ||
                 txtName.getText().equals("")) {
             flag = 1;
-
         }
         if (checkUsername(actionEvent) == true && checkPassword() == true && flag == 0 && checkPhoneNumberEmployee() == true &&
                 checkEmailAddress() == true) {
-
             lblPasswordError.setVisible(false);
             lblUsernameUsedAlready.setVisible(false);
             lblUsernameFree.setVisible(false);
@@ -293,7 +290,6 @@ public class AdminLogin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -319,9 +315,7 @@ public class AdminLogin {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -336,7 +330,6 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void clearAllFields(ActionEvent actionEvent) {
-
         lblPasswordError.setVisible(false);
         lblUsernameUsedAlready.setVisible(false);
         lblUsernameFree.setVisible(false);
@@ -410,7 +403,6 @@ public class AdminLogin {
         primaryStage.setTitle("Remove customer");
         primaryStage.setScene(new Scene(root, 300, 170));
         primaryStage.show();
-
     }
 
     public void FindAndReplaceRemoveCustomers(ActionEvent actionEvent) {
@@ -447,7 +439,6 @@ public class AdminLogin {
         if (counter == phoneNumberIs.length()) {
             return true;
         } else return false;
-
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -456,7 +447,6 @@ public class AdminLogin {
 
     private boolean checkEmailAddress() {
         String emaiiText = txtEmail.getText();
-
         if (emaiiText.contains("@") || emaiiText.contains(".")) {
             return true;
         } else return false;
@@ -495,14 +485,9 @@ public class AdminLogin {
         separator5.setVisible(false);
         btnCheck.setVisible(false);
         lblEmployee.setVisible(false);
-
-        //btnSave.setVisible(false);
-
         cmbViewStatistics.setVisible(true);
         txtViewStatistics.setVisible(true);
         btnView.setVisible(true);
-
-
         createFileWhoContainsOnlyNameOfEmployee();
     }
 
@@ -538,27 +523,24 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void ViewStatisticClicked(ActionEvent actionEvent) throws IOException {
-
-            txtViewStatistics.clear();
-                try {
-                    File file = new File("EmployeeInformation\\" + openFileWhoBySelectName());
-                    boolean isCreated = file.createNewFile();
-                    if (isCreated) {
-                        System.out.println("File has been created successfully");
-                    } else {
-                        System.out.println("\n" + "File already present at the specified location");
-                        Scanner fileReader1 = new Scanner(file);
-                        while (fileReader1.hasNextLine()) {
-                            txtViewStatistics.appendText(fileReader1.nextLine() + " \n");
-                        }
-                        fileReader1.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Exception Occurred:");
-                    e.printStackTrace();
-
+        txtViewStatistics.clear();
+        try {
+            File file = new File("EmployeeInformation\\" + openFileWhoBySelectName());
+            boolean isCreated = file.createNewFile();
+            if (isCreated) {
+                System.out.println("File has been created successfully");
+            } else {
+                System.out.println("\n" + "File already present at the specified location");
+                Scanner fileReader1 = new Scanner(file);
+                while (fileReader1.hasNextLine()) {
+                    txtViewStatistics.appendText(fileReader1.nextLine() + " \n");
+                }
+                fileReader1.close();
             }
-
+        } catch (IOException e) {
+            System.out.println("Exception Occurred:");
+            e.printStackTrace();
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -575,7 +557,7 @@ public class AdminLogin {
                 " The employee has worked for " + readOnlyIntegerHowTimeWorking() + " minutes";
         System.out.println(howSratsWorkindHowWorkingHowFinishedWorking);
         System.out.println(readOnlyIntegerHowTimeWorking());
-        return  howSratsWorkindHowWorkingHowFinishedWorking;
+        return howSratsWorkindHowWorkingHowFinishedWorking;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -584,19 +566,17 @@ public class AdminLogin {
 
     public double readOnlyIntegerHowTimeWorking() throws FileNotFoundException {
         double sum = 0;
-        int lines = 0,count = 0, i =0;
+        int lines = 0, count = 0, i = 0;
         File file = new File("EmployeeInformation\\" + openFileWhoBySelectName());
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
             count++;
             scanner.nextLine();
             if (count >= 4) {
-
                 List<Integer> integers = new ArrayList<>();
                 while (scanner.hasNext()) {
                     if (scanner.hasNextInt()) {
                         integers.add(scanner.nextInt());
-
                     } else {
                         scanner.next();
                     }
@@ -641,7 +621,7 @@ public class AdminLogin {
 
     public void viewHowTimeWorking(ActionEvent actionEvent) throws IOException {
         txtWorkingTime.setVisible(true);
-          txtWorkingTime.setText(howTimeWorkingSetTextInTextField());
+        txtWorkingTime.setText(howTimeWorkingSetTextInTextField());
     }
 }
 
