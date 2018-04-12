@@ -32,7 +32,7 @@ public class Controller {
     public void checkLoginAsEmpoleeOrLoginAsAdmin(ActionEvent actionEvent) throws IOException {
         lblError.setVisible(false);
 
-        if (passwordField.getText().equals("admin") && usernameField.getText().equals("pavel")) {
+         if (passwordField.getText().equals("admin") && usernameField.getText().trim().equals("pavel")) {
             System.out.println("YOU login as admin");
             usernameField.setText("");
             passwordField.setText("");
