@@ -41,6 +41,12 @@ public class ControllerLoginAsEmployee implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        RemoveUserController remover = new RemoveUserController();
+        try {
+            remover.removeEmptyLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println(userWhoNameInSystem);
         try {
             BufferedReader br = new BufferedReader(new FileReader("Customers"));
@@ -54,6 +60,7 @@ public class ControllerLoginAsEmployee implements Initializable {
             }
             br.close();
         } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
         }
     }
 
@@ -123,3 +130,4 @@ public class ControllerLoginAsEmployee implements Initializable {
         System.out.println("AdminLogin.fxml opened");
     }
 }
+
