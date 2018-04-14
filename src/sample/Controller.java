@@ -54,7 +54,7 @@ public class Controller {
 
         int counter = 0;
         try {
-            File file = new File("empoloyeelist");
+            File file = new File("employeeList");
             boolean isCreated = file.createNewFile();
             if (isCreated) {
                 System.out.println("File has been created successfully");
@@ -118,6 +118,4 @@ public class Controller {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-
 
