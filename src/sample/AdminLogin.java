@@ -135,7 +135,7 @@ public class AdminLogin {
         int counter = 0;
         int flag = 0;
         String usernameText = txtUsername.getText();
-        File file = new File("empoloyeelist");
+        File file = new File("employeeList");
         try {
             boolean isCreated = file.createNewFile();
             if (isCreated) {
@@ -208,7 +208,7 @@ public class AdminLogin {
             lblUsernameUsedAlready.setVisible(false);
             lblUsernameFree.setVisible(false);
             lblReady.setVisible(false);
-            File file = new File("empoloyeelist");
+            File file = new File("employeeList");
             FileWriter writer;
             try {
                 boolean isCreated = file.createNewFile();
@@ -238,7 +238,7 @@ public class AdminLogin {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void saveOnlyNamesOnSuccessfullyRegistrationInFile() {
-        File file = new File("FileNameEmloyee");
+        File file = new File("fileNameEmployee");
         FileWriter writer;
         int flag = 0;
         try {
@@ -497,7 +497,7 @@ public class AdminLogin {
 
     public void createFileWhoContainsOnlyNameOfEmployee() {
         try {
-            File file = new File("FileNameEmloyee");
+            File file = new File("fileNameEmployee");
             boolean isCreated = file.createNewFile();
             if (isCreated) {
                 System.out.println("File has been created successfully");
